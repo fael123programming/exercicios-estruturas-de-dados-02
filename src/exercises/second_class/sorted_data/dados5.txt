@@ -1,0 +1,13 @@
+Ordering 5 numbers
+Time-stamping: 2021-10-18T23:10:06.129847900
+## Insertion sort ##
+Number of moves: 13
+Number of comparisons: 23
+Time spent: 0:0:0:0
+
+## Selection sort ##
+Number of moves: 9
+Number of comparisons: 33
+Time spent: 0:0:0:0
+
+## Ordered data set ##: [-13805, 3724, 3945, 5371, 16190]
