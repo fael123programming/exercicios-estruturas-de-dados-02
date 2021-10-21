@@ -1,5 +1,5 @@
 Ordering 5 numbers
-Time-stamping: 2021-10-18T23:10:06.129847900
+Time-stamping: 2021-10-21T17:00:39.857693400
 ## Insertion sort ##
 Number of moves: 13
 Number of comparisons: 23
