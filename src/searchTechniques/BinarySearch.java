@@ -36,4 +36,26 @@ public class BinarySearch {
         }
         return low; //If not found, low will contain the possible position for it.
     }
+
+    public static int searchPossible(int[] numbers, int wanted) {
+        int low = 0, high = numbers.length, mid;
+        while (low <= high) {
+            mid = (low + high) / 2;
+            if (numbers[mid] == wanted) return mid;
+            if (numbers[mid] < wanted) low = mid + 1;
+            else high = mid - 1;
+        }
+        return low; //If not found, low will contain the possible position for it.
+    }
+
+    public static int searchPossible(int[] numbers, int wanted, int from, int to) {
+        int low = from, high = to, mid;
+        while (low <= high) {
+            mid = (low + high) / 2;
+            if (numbers[mid] == wanted) return mid;
+            if (numbers[mid] < wanted) low = mid + 1;
+            else high = mid - 1;
+        }
+        return low; //If not found, low will contain the possible position for it.
+    }
 }
