@@ -1,4 +1,4 @@
-package sortingMethods.binaryInsertionSort;
+package sorting_methods.binary_insertion_sort;
 
 public class Number {
     private int value;

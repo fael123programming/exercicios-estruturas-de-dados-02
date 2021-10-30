@@ -1,8 +1,8 @@
 package exercises.second_class;
 
 import files.FileHandler;
-import sortingMethods.insertionSort.InsertionSort;
-import sortingMethods.selectionSort.SelectionSort;
+import sorting_methods.insertion_sort.InsertionSort;
+import sorting_methods.selection_sort.SelectionSort;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;

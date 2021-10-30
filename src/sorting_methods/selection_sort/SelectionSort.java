@@ -1,6 +1,6 @@
-package sortingMethods.selectionSort;
+package sorting_methods.selection_sort;
 
-import timeMeasurement.Time;
+import time_measurement.Time;
 
 public class SelectionSort {
     private String info;

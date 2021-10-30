@@ -1,6 +1,4 @@
-package sortingMethods.binaryInsertionSort;
-
-import searchTechniques.BinarySearch;
+package sorting_methods.binary_insertion_sort;
 
 import java.util.Arrays;
 import java.util.LinkedList;

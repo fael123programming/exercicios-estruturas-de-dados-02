@@ -1,6 +1,6 @@
-package sortingMethods.insertionSort;
+package sorting_methods.insertion_sort;
 
-import timeMeasurement.Time;
+import time_measurement.Time;
 
 public class InsertionSort {
     private String info;

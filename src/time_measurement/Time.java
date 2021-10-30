@@ -1,4 +1,4 @@
-package timeMeasurement;
+package time_measurement;
 
 import java.util.Date;
 

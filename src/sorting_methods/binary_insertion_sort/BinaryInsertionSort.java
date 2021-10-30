@@ -1,6 +1,6 @@
-package sortingMethods.binaryInsertionSort;
+package sorting_methods.binary_insertion_sort;
 
-import searchTechniques.BinarySearch;
+import search_techniques.BinarySearch;
 
 import java.util.LinkedList;
 
@@ -16,6 +16,8 @@ public class BinaryInsertionSort {
     }
 
     public static void sort(int[] numbers) {
+        //It is impracticable to use Binary Insertion Sort with arrays as it is done here.
+        //Better usage would be with linked lists!
         int key, rightPos;
         for (int i = 1; i < numbers.length; i++) {
             key = numbers[i];
