@@ -1,0 +1,8 @@
+Sorting 5 numbers: factor 1.3
+Time-stamping: 2021-11-02T08:24:31.235432300
+## Comb sort ##
+Elements: 5
+Movements: 9
+Comparisons: 50
+Time spent: 0:0:0:0
+## Ordered data set ##: [-13805, 3724, 3945, 5371, 16190]

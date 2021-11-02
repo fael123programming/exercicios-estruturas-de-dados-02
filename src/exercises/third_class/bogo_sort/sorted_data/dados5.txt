@@ -1,0 +1,8 @@
+Sorting 5 numbers
+Time-stamping: 2021-11-02T07:52:10.095606700
+## Bogo Sort##
+Elements: 5
+Movements: 1365
+Comparisons: 1058
+Time spent: 0:0:0:1
+## Ordered data set ##: [-13805, 3724, 3945, 5371, 16190]
