@@ -118,8 +118,8 @@ public class Main {
         File newFile = new File(filePath);
         try {
             newFile.createNewFile(); //If the file exists or not, we don't care about it!
-            FileHandler.writeOver(filePath, title + "\nTime-stamping: " + LocalDateTime.now() +"\n## Insertion sort ##\n" + INSORT.getInfo() + "\n\n## Selection sort ##\n" + SELSORT.getInfo() + "\n\n## Ordered data set ##: " + sortedNumbersInString);
-        }catch(IOException | SecurityException e) {
+            FileHandler.writeOver(filePath, title + "\nTime-stamping: " + LocalDateTime.now() + "\n## Insertion sort ##\n" + INSORT.getInfo() + "\n\n## Selection sort ##\n" + SELSORT.getInfo() + "\n\n## Ordered data set ##: " + sortedNumbersInString);
+        } catch (IOException | SecurityException e) {
             System.out.println("########### Something went bad! ############");
             System.exit(-1);
         }
