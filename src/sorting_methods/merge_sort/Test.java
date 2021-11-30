@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Test {
     public static void main(String[] args) {
         int[] n1 = {11, 1, 10, 2, 9, 3, 8, 4, 2, 11};
-        MergeSort.sort(n1);
+        MergeSort.sort2(n1);
         System.out.println(Arrays.toString(n1));
         final int SIZE = 173539323;
         int[] numbers = new int[SIZE];
@@ -14,8 +14,8 @@ public class Test {
             numbers[i] = SIZE - i;
         }
         Time.startCounting();
-        MergeSort.sort(numbers); //n * log(n)
+        MergeSort.sort2(numbers); //n * log(n)
         Time.finishCounting();
-        System.out.println(Time.getTime());
+        System.out.println(SIZE + " numbers were sorted in " + Time.getTime());
     }
 }
