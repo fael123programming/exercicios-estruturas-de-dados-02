@@ -1,21 +1,26 @@
 package sorting_methods.merge_sort;
 
+import time_measurement.Time;
+
 public class MergeSort {
     private static long comparisons, moves;
     private static StringBuilder report;
 
     public static void sort(int[] numbers) {
+        Time.startCounting();
         mergeSort(numbers);
+        Time.finishCounting();
         report = new StringBuilder();
         report.append("Merge Sort\n");
         report.append("Size of the input: ").append(numbers.length).append("\n");
         report.append("Comparisons: ").append(comparisons).append("\n");
         report.append("Moves: ").append(moves).append("\n");
+        report.append("Time (HH:MM:SS:mm): ").append(Time.getTime());
         comparisons = 0;
         moves = 0;
     }
 
-    public String getReport(){
+    public static String getReport(){
         if(report == null)
             return null;
         return report.toString();

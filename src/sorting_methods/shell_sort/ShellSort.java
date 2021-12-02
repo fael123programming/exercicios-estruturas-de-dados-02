@@ -9,11 +9,14 @@ package sorting_methods.shell_sort;
 //It is not stable.
 //Smaller elements (known as turtle elements) are handled with more efficiency than insertion sort.
 
+import time_measurement.Time;
+
 public class ShellSort {
     private static long comparisons, moves;
     private static StringBuilder report;
 
     public static void sort(int[] numbers) {
+        Time.startCounting();
         int h = numbers.length / 2, i, aux, j;
         while (h > 0) {
             comparisons++; //At line 18.
@@ -31,12 +34,14 @@ public class ShellSort {
             comparisons++; //At line 21 that made that for to break.
             h /= 2; //Integer division: the result will be truncated not rounded.
         }
+        Time.finishCounting();
         comparisons++; //At line 18 that made that while to break.
         report = new StringBuilder();
         report.append("Shell Sort\n");
         report.append("Size of the input: ").append(numbers.length).append("\n");
         report.append("Comparisons: ").append(comparisons).append("\n");
         report.append("Moves: ").append(moves).append("\n");
+        report.append("Time (HH:MM:SS:mm): ").append(Time.getTime());
         comparisons = 0;
         moves = 0;
     }
@@ -46,16 +51,4 @@ public class ShellSort {
             return null;
         return report.toString();
     }
-
-//    public static void main(String[] args) {
-//        int[] numbers = new int[10000];
-//        for (int i = 0; i < 10000; i++)
-//            numbers[i] = 10000 - i;
-//        System.out.println(Arrays.toString(numbers));
-//        ShellSort.sort(numbers);
-//        for (int i = 0; i < 9999; i++)
-//            if (numbers[i] > numbers[i + 1])
-//                System.out.println(numbers[i] + " is greater than " + numbers[i + 1]);
-//        System.out.println(Arrays.toString(numbers));
-//    }
 }

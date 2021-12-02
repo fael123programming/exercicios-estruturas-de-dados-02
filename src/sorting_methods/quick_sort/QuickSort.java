@@ -1,5 +1,7 @@
 package sorting_methods.quick_sort;
 
+import time_measurement.Time;
+
 public class QuickSort {
     private static long comparisons, moves;
     private static StringBuilder report;
@@ -9,12 +11,15 @@ public class QuickSort {
     }
 
     public static void enhancedSort(int[] numbers) {
+        Time.startCounting();
         enhancedQuickSort(numbers, 0, numbers.length - 1);
+        Time.finishCounting();
         report = new StringBuilder();
         report.append("Quick Sort\n");
         report.append("Size of the input: ").append(numbers.length).append("\n");
         report.append("Comparisons: ").append(comparisons).append("\n");
         report.append("Moves: ").append(moves).append("\n");
+        report.append("Time (HH:MM:SS:mm): ").append(Time.getTime());
         comparisons = 0;
         moves = 0;
     }
