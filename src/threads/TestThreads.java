@@ -1,4 +1,4 @@
-package threads.ex1;
+package threads;
 
 public class TestThreads {
     public static void main(String[] args) {

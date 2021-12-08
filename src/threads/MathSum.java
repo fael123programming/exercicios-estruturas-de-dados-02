@@ -1,4 +1,4 @@
-package threads.ex1;
+package threads;
 
 import java.util.Scanner;
 
