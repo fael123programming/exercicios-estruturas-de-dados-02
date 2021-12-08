@@ -69,7 +69,7 @@ public class QuickSort {
         return (int) (from + (Math.random()  * (to + 1 - from)));
     }
 
-    private static void swap(int[] numbers, int srcPos, int destPos) {
+    public static void swap(int[] numbers, int srcPos, int destPos) {
         int aux = numbers[srcPos];
         numbers[srcPos] = numbers[destPos];
         numbers[destPos] = aux;
