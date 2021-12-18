@@ -1,7 +1,7 @@
 package exercises.third_class.bubble_sort;
 
 import files.FileHandler;
-import sorting_methods.bubble_sort.BubbleSort;
+import sorting_methods.comparison_sorts.bubble_sort.BubbleSort;
 
 import java.io.File;
 import java.io.IOException;

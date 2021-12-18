@@ -1,7 +1,7 @@
 package exercises.fifth_class;
 
 import exercises.fourth_class.AuxiliarClass;
-import sorting_methods.heap_sort.HeapSort;
+import sorting_methods.comparison_sorts.heap_sort.HeapSort;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package exercises.third_class.bogo_sort;
 
 import files.FileHandler;
-import sorting_methods.bogo_sort.BogoSort;
+import sorting_methods.comparison_sorts.bogo_sort.BogoSort;
 
 import java.io.File;
 import java.io.IOException;

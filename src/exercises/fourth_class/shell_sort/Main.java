@@ -1,7 +1,7 @@
 package exercises.fourth_class.shell_sort;
 
 import exercises.fourth_class.AuxiliarClass;
-import sorting_methods.shell_sort.ShellSort;
+import sorting_methods.comparison_sorts.shell_sort.ShellSort;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package exercises.third_class.comb_sort.factor_one;
 
 import files.FileHandler;
-import sorting_methods.comb_sort.CombSort;
+import sorting_methods.comparison_sorts.comb_sort.CombSort;
 
 import java.io.File;
 import java.io.IOException;
