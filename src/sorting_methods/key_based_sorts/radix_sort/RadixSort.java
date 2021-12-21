@@ -1,5 +1,7 @@
 package sorting_methods.key_based_sorts.radix_sort;
 
+import java.util.Arrays;
+
 /**
  * Radix sort is a sorting algorithm that uses the own characteristics of each item it has to sort to do its job.
  * It is used in conjunction with counting sort to analyze smaller elements: counting sort is applied on the input
@@ -15,10 +17,47 @@ package sorting_methods.key_based_sorts.radix_sort;
  */
 
 public class RadixSort {
+    /**
+     * M.S.D (Most Significant Digit) based Radix Sort. It sorts the input evaluating each key digit
+     * from right to left.
+     * Example of input: 189 890 123
+     * First counting sort: sort 1 8 1
+     * Second counting sort: sort 8 9 2
+     * Third counting sort: sort 9 0 3
+     * @param numbers the array of numbers to sort
+     */
     public static void MSDSort(int[] numbers) {
-
+        int executions = digits(maxAbsolute(numbers));
+        int[] group; //An array to contain the sorted numbers.
+        int[] sorted = new int[numbers.length];
+        int j = 0;
+//        {1810, 2236, 3559, 9002, 9001, 3, 100, 500, 20, 13}
+        while (executions > 0) {
+            group = new int[numbersWithDigits(numbers, executions)];
+            for (int number : numbers) //Computing the frequencies of numbers that have same quantity of digits.
+                if (digits(number) == executions)
+                    group[j++] = number;
+            countingSort(group, 0, group.length - 1); //Recursive M.S.D counting sort.
+            System.arraycopy(group, 0, sorted, group.length, group.length);
+            executions--;
+            j = 0;
+        }
+        System.arraycopy(sorted, 0, numbers, 0, sorted.length);
     }
 
+    private static void countingSort(int[] array, int startPos, int endPos) {
+        
+    }
+
+    /**
+     * L.S.D (the Least Significant Digit) based Radix Sort. It sorts the input evaluating each key digit
+     * from left to right.
+     * Example of input: 189 890 123
+     * First counting sort: sort 9 0 3
+     * Second counting sort: sort 8 9 2
+     * Third counting sort: sort 1 8 1
+     * @param numbers the array of numbers to sort
+     */
     public static void LSDSort(int[] numbers) {
 //      Let 'max' be the maximum key found in 'numbers' (not considering sign), then counting sort will be
 //      executed the quantity of digits 'max' has.
@@ -101,5 +140,36 @@ public class RadixSort {
                 max = aux;
         }
         return max;
+    }
+
+    private static void swap(int[] array, int srcPos, int destPos) {
+        if (array == null)
+            return;
+        if (srcPos < 0 || srcPos > array.length - 1)
+            return;
+        if (destPos < 0 || destPos > array.length - 1)
+            return;
+        if (destPos == srcPos)
+            return;
+        int destValue = array[destPos];
+        array[destPos] = array[srcPos];
+        array[srcPos] = destValue;
+    }
+
+    /**
+     * Returns how many numbers with a specific quantity
+     * of digits an array has.
+     * @param numbers the array where to search
+     * @param digits the quantity of digits a number has to have to be countered.
+     * @return the quantity of numbers found with the specific quantity of digits.
+     */
+    private static int numbersWithDigits(int[] numbers, int digits) {
+        if (numbers == null || digits <= 0)
+            return -1;
+        int quantity = 0;
+        for (int number : numbers)
+            if (digits(number) == digits)
+                quantity++;
+        return quantity;
     }
 }
