@@ -1,7 +1,6 @@
 package sorting_methods.key_based_sorts.radix_sort;
 
-import java.util.Arrays;
-
+import java.util.*;
 /**
  * Radix sort is a sorting algorithm that uses the own characteristics of each item it has to sort to do its job.
  * It is used in conjunction with counting sort to analyze smaller elements: counting sort is applied on the input
@@ -18,35 +17,88 @@ import java.util.Arrays;
 
 public class RadixSort {
     /**
-     * M.S.D (Most Significant Digit) based Radix Sort. It sorts the input evaluating each key digit
-     * from right to left.
-     * Example of input: 189 890 123
-     * First counting sort: sort 1 8 1
-     * Second counting sort: sort 8 9 2
-     * Third counting sort: sort 9 0 3
+     * M.S.D (Most Significant Digit) based Radix Sort. It sorts the
+     * input evaluating each key digit from left to right.
      * @param numbers the array of numbers to sort
      */
     public static void MSDSort(int[] numbers) {
-        int executions = digits(maxAbsolute(numbers));
-        int[] group; //An array to contain the sorted numbers.
-        int[] sorted = new int[numbers.length];
-        int j = 0;
-//        {1810, 2236, 3559, 9002, 9001, 3, 100, 500, 20, 13}
-        while (executions > 0) {
-            group = new int[numbersWithDigits(numbers, executions)];
-            for (int number : numbers) //Computing the frequencies of numbers that have same quantity of digits.
-                if (digits(number) == executions)
-                    group[j++] = number;
-            countingSort(group, 0, group.length - 1); //Recursive M.S.D counting sort.
-            System.arraycopy(group, 0, sorted, group.length, group.length);
-            executions--;
-            j = 0;
+        int executions;
+        int[] group; //An array to contain a group of sorted numbers.
+        int[] sorted = new int[numbers.length]; //A list to contain all groups of sorted numbers before copying
+//      it into 'numbers'.
+//      First, sort all negative numbers.
+        int insertablePos = 0; //To contain the next valid index in sort to insert sorted numbers.
+        int[] negativeNumbers = getAllNegativeNumbers(numbers);
+        if (negativeNumbers != null) { //If that is true, there is at least one negative number to be sorted.
+            positivate(negativeNumbers); //Put all negative numbers in module.
+            executions = digits(max(negativeNumbers));
+            while (executions > 0) {
+                group = getArray(negativeNumbers, executions);
+                countingSort(group, 0, group.length - 1, executions - 1);
+                for (int i = group.length - 1; i > -1; i--)
+                    sorted[insertablePos++] = group[i] * -1; //Getting each number back to its original negative sign.
+                executions--;
+            }
         }
-        System.arraycopy(sorted, 0, numbers, 0, sorted.length);
+        executions = digits(max(numbers));
+        while (executions > 0) {
+            group = getArray(numbers, executions);
+//          'group' will contain all numbers that have a specific quantity of digits.
+//          This quantity of digits is shown by 'executions'.
+            countingSort(group, 0, group.length - 1, executions - 1); //Recursive M.S.D counting sort.
+            for (int i = group.length - 1; i > -1; i--)
+                sorted.addFirst(group[i]);
+            executions--;
+        }
+        ListIterator<Integer> it = sorted.listIterator();
+        int j = 0;
+        while (it.hasNext())
+            numbers[j++] = it.next();
     }
 
-    private static void countingSort(int[] array, int startPos, int endPos) {
-        
+    /**
+     * Recursive implementation of counting sort method. This method receives an array
+     * of integers and sorts all its numbers using M.S.D radix sort (that is, analyzing
+     * each digit from most-left towards most-right). If it encounters two numbers
+     * with same first digits, it goes sorting these numbers recursively looking up
+     * to the next positional digit differentiating them till they get totally sorted.
+     * There is an intrinsic requirement to use this method on your radix sort: the
+     * input has to be of numbers that have the same quantity of digits and all of
+     * them greater than or equal to zero (non-negative).
+     * @param numbers the array of integers to be sorted
+     * @param startPos the first position of the array to be considered
+     * @param endPos the last position of the array to be considered
+     * @param positionalDigit the initial digit to be considered. As standard of this approach,
+     * let k be the maximum number found in numbers, positionalDigit would be the quantity
+     * of digits k has minus 1.
+     * @see #digitAt(int, int)
+     */
+    private static void countingSort(int[] numbers, int startPos, int endPos, int positionalDigit) {
+        if (positionalDigit < 0)
+            return; //Recursion base for totally equal numbers!!!
+        int[] sorted = new int[endPos - startPos + 1];
+        int[] frequencies = new int[10]; //0-9 possible digits.
+        for (int i = startPos; i <= endPos; i++) {//Computing frequencies of all digits.
+            if (numbers[i] < 0)
+                continue;
+            frequencies[digitAt(positionalDigit, numbers[i])]++;
+        }
+        for (int i = 0; i < frequencies.length - 1; i++)
+            frequencies[i + 1] += frequencies[i];
+        for (int i = endPos; i >= startPos; i--)
+            sorted[--frequencies[digitAt(positionalDigit, numbers[i])]] = numbers[i];
+        int j;
+        for (int i = 0; i < sorted.length - 1; i++) {
+            j = i;
+            while (j < sorted.length - 1 && digitAt(positionalDigit, sorted[i]) == digitAt(positionalDigit, sorted[j + 1]))
+                j++;
+            if (i != j) {
+                countingSort(sorted, i, j, positionalDigit - 1);
+                //Recursive call: sort numbers with same first digits till it gets totally sorted.
+                i = j; //To avoid unnecessary iterations.
+            }
+        }
+        System.arraycopy(sorted, 0, numbers, startPos, sorted.length);
     }
 
     /**
@@ -92,12 +144,13 @@ public class RadixSort {
 
     /**
      * Uses math operations of module and division by 10 to return a digit in a specific
-     * position in an integer number.
-     *
+     * position in an integer number. The approach used in this method is the same used
+     * to index positions of arrays, that is, if an array has size x then it will vary
+     * from position 0 to x - 1.
      * @param position the position of the desired digit in number
      * @param number the integer number to get the digit
      * @return the digit at position "position" in number if existent. If position is < 0, then -1 is returned.
-     * If greater than the quantity of digits number has, then 0 is returned.
+     * If greater than or equal to the quantity of digits number has, then 0 is returned.
      */
     private static int digitAt(int position, int number) {
         if (position < 0)
@@ -142,6 +195,14 @@ public class RadixSort {
         return max;
     }
 
+    private static int max(int[] numbers) {
+        int max = numbers[0];
+        for (int number : numbers)
+            if (number > max)
+                max = number;
+        return max;
+    }
+
     private static void swap(int[] array, int srcPos, int destPos) {
         if (array == null)
             return;
@@ -171,5 +232,53 @@ public class RadixSort {
             if (digits(number) == digits)
                 quantity++;
         return quantity;
+    }
+
+    /**
+     * Returns a newly created array containing all numbers found
+     * in another array with a specific quantity of digits. It
+     * ignores negative numbers.
+     * @param srcArray the array where to search
+     * @param digits the quantity of digits a number need to have
+     * @return an array of numbers with a specific quantity
+     * of digits
+     */
+    private static int[] getArray(int[] srcArray, int digits) {
+        if (srcArray == null || digits <= 0)
+            return null;
+        LinkedList<Integer> list = new LinkedList<>();
+        for (int number : srcArray) {
+            if (number < 0)
+                continue;
+            if (digits(number) == digits)
+                list.addLast(number);
+        }
+        int[] finalResult = new int[list.size()];
+        Iterator<Integer> it = list.iterator();
+        int j = 0;
+        while (it.hasNext())
+            finalResult[j++] = it.next();
+        return finalResult;
+    }
+
+    private static int[] getAllNegativeNumbers(int[] srcArray) {
+        LinkedList<Integer> aList = new LinkedList<>();
+        for (int number : srcArray)
+            if (number < 0)
+                aList.addLast(number);
+        if (aList.isEmpty())
+            return null; //No negative integers found in srcArray.
+        ListIterator<Integer> it = aList.listIterator();
+        int[] result = new int[aList.size()];
+        int j = 0;
+        while (it.hasNext())
+            result[j++] = it.next();
+        return result;
+    }
+
+    private static void positivate(int[] srcArray) {
+        for (int i = 0; i < srcArray.length; i++)
+            if (srcArray[i] < 0)
+                srcArray[i] *= -1;
     }
 }

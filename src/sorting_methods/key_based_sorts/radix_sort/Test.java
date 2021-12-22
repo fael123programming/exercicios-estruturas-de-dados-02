@@ -4,8 +4,9 @@ import java.util.Arrays;
 
 public class Test {
     public static void main(String[] args) {
-        int[] numbers = {1810, 2236, 3559, 9002, 9001, 3, 100, 500, 20, 13};
-        RadixSort.MSDSort(numbers);
+        int[] numbers = {-678, 1000, 678, 679};
+        System.out.println(Arrays.toString(numbers));
+        RadixSort. MSDSort(numbers);
         System.out.println(Arrays.toString(numbers));
     }
 }
