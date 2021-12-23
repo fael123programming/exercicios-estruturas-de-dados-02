@@ -1,4 +1,4 @@
-package exercises.fourth_class;
+package exercises.aux_class;
 
 import java.io.*;
 import java.util.Arrays;

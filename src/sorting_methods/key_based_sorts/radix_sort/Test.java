@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class Test {
     public static void main(String[] args) {
-        int[] numbers = {-678, 1000, 678, 679};
+        int[] numbers = {-10, -11, -12, 678, -13, -15, -14, 0};
         System.out.println(Arrays.toString(numbers));
-        RadixSort. MSDSort(numbers);
+        RadixSort.LSDSort(numbers);
         System.out.println(Arrays.toString(numbers));
     }
 }

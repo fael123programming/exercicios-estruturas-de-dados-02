@@ -1,6 +1,6 @@
 package exercises.fourth_class.merge_sort;
 
-import exercises.fourth_class.AuxiliarClass;
+import exercises.aux_class.AuxiliarClass;
 import sorting_methods.comparison_sorts.merge_sort.MergeSort;
 
 public class Main {

@@ -1,6 +1,6 @@
 package exercises.fifth_class;
 
-import exercises.fourth_class.AuxiliarClass;
+import exercises.aux_class.AuxiliarClass;
 import sorting_methods.comparison_sorts.heap_sort.HeapSort;
 
 public class Main {

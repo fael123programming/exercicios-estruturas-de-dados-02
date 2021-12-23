@@ -1,0 +1,8 @@
+L.S.D Radix Sort
+Size of the input: 5
+Comparisons: 368
+Moves: 50
+Time spent (HH:MM:SS:mm): 0:0:0:0
+
+Sorted array: 
+[-13805, 3724, 3945, 5371, 16190]

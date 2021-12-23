@@ -1,5 +1,7 @@
 package sorting_methods.key_based_sorts.counting_sort;
 
+import time_measurement.Time;
+
 /** CountingSort goes from the fact that an array has its positions always sorted!!!
  * From 0 through its size subtracted one.
  * Let a[] = {1, 0, 2, 1, 0, 1, 1, 5, 6, 7, 5, 4, 2, 2, 0, 0, 1};
@@ -24,42 +26,64 @@ package sorting_methods.key_based_sorts.counting_sort;
  */
 
 public class CountingSort {
+    private static long moves, comparisons;
+    private static StringBuilder report;
+
     public static void sort(int[] numbers) {
+        Time.startCounting();
         int max = 0, mostNegative = 0;
 //      Find out who is the maximum value and check if there is at least a negative number: O(n)
+        comparisons++;
         for (int i = 0; i < numbers.length; i++) {
+            comparisons += 2;
             if (i == 0)
                 max = numbers[0];
             else if (numbers[i] > max)
                 max = numbers[i];
+            comparisons++;
             if (numbers[i] < mostNegative)
                 mostNegative = numbers[i];
+            comparisons++;
         }
 //      If mostNegative != 0 it means that we have at least one negative number in 'numbers', and
 //      we should normalize our input.
+        comparisons++;
         if (mostNegative != 0) { //Plus O(n) if that is the case!
             mostNegative *= -1; //To use the absolute value of mostNegative!
-            for (int i = 0; i < numbers.length; i++)
+            comparisons++;
+            for (int i = 0; i < numbers.length; i++) {
                 numbers[i] += mostNegative;
+                comparisons++;
+            }
 //          After this loop, we will not have negative numbers anymore.
             max += mostNegative; //We will have to update the size of the array 'count' to a larger one.
 //          Remember that we use 'max' to tell how big 'count' is going to be.
         }
 //      Count the frequency of each element in 'numbers': O(n)
         int[] count = new int[max + 1];
-        for (int i : numbers)
+        comparisons++;
+        for (int i : numbers) {
             count[i]++;
+            comparisons++;
+        }
 //      Each key in 'numbers' will point to an exact position in 'count'.
 //      Then, increment this position by one.
 //      ------------------------------------------------------------------
 //      Update 'count' such that it will contain the last position a key
 //      will have to be in the sorted array.
-        for (int i = 0; i < count.length - 1; i++)
+        comparisons++;
+        for (int i = 0; i < count.length - 1; i++) {
             count[i + 1] += count[i];
+            comparisons++;
+        }
 //      Now, let us build our sorted array.
         int[] sorted = new int[numbers.length];
-        for (int i = sorted.length - 1; i > -1; i--)  //From last position backwards to maintain stability!
+        comparisons++;
+        for (int i = sorted.length - 1; i > -1; i--) { //From last position backwards to maintain stability!
+            moves++;
             sorted[--count[numbers[i]]] = numbers[i] - mostNegative;
+            comparisons++;
+        }
 //      Let me explain what the line above means:
 //      -> Access the key at position 'i' in numbers;
 //      -> With this key value, check the position in 'count' indexed by this very same value;
@@ -70,6 +94,18 @@ public class CountingSort {
 //      we multiplied mostNegative by -1 to put it as its absolute value.
 //      ----------------------------------------------------------------------
 //      Now, we have got to copy 'sorted' into 'numbers'!
+        moves += sorted.length;
         System.arraycopy(sorted, 0, numbers, 0, sorted.length);
+        Time.finishCounting();
+        report = new StringBuilder();
+        report.append("Counting Sort\n");
+        report.append("Size of the input: ").append(numbers.length).append("\n");
+        report.append("Comparisons: ").append(comparisons).append("\n");
+        report.append("Moves: ").append(moves).append("\n");
+        report.append("Time spent (HH:MM:SS:mm): ").append(Time.getTime()).append("\n");
+    }
+
+    public static String getReport() {
+        return report == null ? null : report.toString();
     }
 }
