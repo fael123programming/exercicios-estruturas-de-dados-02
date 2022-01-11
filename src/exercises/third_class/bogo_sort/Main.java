@@ -1,28 +1,23 @@
 package exercises.third_class.bogo_sort;
 
+import exercises.aux_class.AuxiliarClass;
 import sorting_methods.comparison_sorts.bogo_sort.BogoSort;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-//        int[] numbers = getArrayOfNumbersFromFile("src/exercises/second_class/unsorted_data/dados5.txt");
-//        BogoSort.sort(numbers);
-//        System.out.println("Sorting dados5.txt: Bogo Sort");
-//        System.out.println("--------------------------------------------------");
-//        System.out.println(BogoSort.getInfo());
-//        recordInfoOntoFile(Arrays.toString(numbers), "Sorting 5 numbers", "src/exercises/third_class/bogo_" +
-//                "sort/sorted_data/dados5.txt");
-//    }
-//
-//    private static void recordInfoOntoFile(String sortedArray, String title, String filePath) {
-//        File newFile = new File(filePath);
-//        try {
-//            newFile.createNewFile(); //If the file exists or not, we don't care about it!
-//            FileHandler.writeOver(filePath, title + "\nTime-stamping: " + LocalDateTime.now() +"\n## Bogo Sort" +
-//                    "##\n" + BogoSort.getInfo() + "\n## Ordered data set ##: " + sortedArray);
-//        } catch(IOException | SecurityException e) {
-//            System.out.println("########### Something went bad! ############");
-//            System.exit(-1);
-//        }
+        //Root path of the unsorted files.
+        final String ROOT_PATH_UNSORTED_DATA = "src/exercises/unsorted_data/";
+        //Root path to create the new files with sorted data.
+        final String ROOT_PATH_SORTED_DATA = "src/exercises/third_class/bogo_sort/sorted_data/";
+        int[] numbers; //Array to contain all numbers gotten from the files with unsorted data.
+        System.out.println("Bogo Sort Ordination");
+        System.out.println("----------------------------------------------------------------------");
+//        File with 5 numbers.
+        System.out.println("File with 5 numbers");
+        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados5.txt");
+        BogoSort.sort(numbers);
+        System.out.println(BogoSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados5.txt", numbers, BogoSort.getReport());
+//    ----------------------------------------------------------------------------------------------------
     }
 }

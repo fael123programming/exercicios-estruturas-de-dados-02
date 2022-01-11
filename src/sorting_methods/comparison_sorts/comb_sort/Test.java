@@ -12,6 +12,6 @@ public class Test {
         //System.out.println(Arrays.toString(numbers));
         CombSort.sort(numbers, 1.3);
         System.out.println(Arrays.toString(numbers));
-        System.out.println(CombSort.getInfo());
+        System.out.println(CombSort.getReport());
     }
 }

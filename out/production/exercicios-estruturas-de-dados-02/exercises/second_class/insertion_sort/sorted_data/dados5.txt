@@ -1,7 +1,7 @@
-Comb Sort: factor 2.0
+Insertion Sort
 Size of the input: 5
-Comparisons: 40
-Moves: 9
+Comparisons: 23
+Moves: 13
 Time (HH:MM:SS:mm): 0:0:0:0
 Sorted array: 
 [-13805, 3724, 3945, 5371, 16190]

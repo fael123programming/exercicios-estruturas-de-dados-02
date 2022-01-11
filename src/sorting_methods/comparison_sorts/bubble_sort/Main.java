@@ -8,6 +8,6 @@ public class Main {
             numbers[i] = SIZE - i;
         }
         BubbleSort.sort(numbers);
-        System.out.println(BubbleSort.getInfo());
+        System.out.println(BubbleSort.getReport());
     }
 }

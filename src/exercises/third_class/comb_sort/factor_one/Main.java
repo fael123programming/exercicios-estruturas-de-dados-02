@@ -1,73 +1,66 @@
 package exercises.third_class.comb_sort.factor_one;
 
-import files.FileHandler;
+import exercises.aux_class.AuxiliarClass;
 import sorting_methods.comparison_sorts.comb_sort.CombSort;
 
 public class Main {
     public static void main(String[] args) {
-//        final double FACTOR = 1;
-//        final String BASE_ROOT_TO_WRITE = "src/exercises/third_class/comb_sort/factor_one/sorted_data/";
-//        final String BASE_ROOT_TO_READ = "src/exercises/second_class/unsorted_data/";
-//        int[] numbers; //Used to contain our numbers gotten from the files.
-//        //-----------------------------------------------------
-//        message("Sorting dados5.txt: Comb Sort with factor " + FACTOR);
-//        numbers = getArrayOfNumbersFromFile(BASE_ROOT_TO_READ + "dados5.txt");
-//        CombSort.sort(numbers, FACTOR);
-//        System.out.println(CombSort.getInfo());
-//        recordInfoOntoFile(Arrays.toString(numbers), "Sorting 5 numbers: factor " + FACTOR, BASE_ROOT_TO_WRITE + "dados5.txt");
-//        //-----------------------------------------------------
-//        message("Sorting dados100.txt: Comb Sort with factor " + FACTOR);
-//        numbers = getArrayOfNumbersFromFile(BASE_ROOT_TO_READ + "dados100.txt");
-//        CombSort.sort(numbers, FACTOR);
-//        System.out.println(CombSort.getInfo());
-//        recordInfoOntoFile(Arrays.toString(numbers), "Sorting 100 numbers: factor " + FACTOR, BASE_ROOT_TO_WRITE + "dados100.txt");
-//        //-----------------------------------------------------
-//        message("Sorting dados1000.txt: Comb Sort with factor " + FACTOR);
-//        numbers = getArrayOfNumbersFromFile(BASE_ROOT_TO_READ + "dados1000.txt");
-//        CombSort.sort(numbers, FACTOR);
-//        System.out.println(CombSort.getInfo());
-//        recordInfoOntoFile(Arrays.toString(numbers), "Sorting 1000 numbers: factor " + FACTOR, BASE_ROOT_TO_WRITE + "dados1000.txt");
-//        //-----------------------------------------------------
-//        message("Sorting dados10_mil.txt: Comb Sort with factor " + FACTOR);
-//        numbers = getArrayOfNumbersFromFile(BASE_ROOT_TO_READ + "dados10_mil.txt");
-//        CombSort.sort(numbers, FACTOR);
-//        System.out.println(CombSort.getInfo());
-//        recordInfoOntoFile(Arrays.toString(numbers), "Sorting 10000 numbers: factor " + FACTOR, BASE_ROOT_TO_WRITE + "dados10_mil.txt");
-//        //-----------------------------------------------------
-//        message("Sorting dados50_mil.txt: Comb Sort with factor " + FACTOR);
-//        numbers = getArrayOfNumbersFromFile(BASE_ROOT_TO_READ + "dados50_mil.txt");
-//        CombSort.sort(numbers, FACTOR);
-//        System.out.println(CombSort.getInfo());
-//        recordInfoOntoFile(Arrays.toString(numbers), "Sorting 50000 numbers: factor " + FACTOR, BASE_ROOT_TO_WRITE + "dados50_mil.txt");
-//        //-----------------------------------------------------
-//        message("Sorting dados100_mil.txt: Comb Sort with factor " + FACTOR);
-//        numbers = getArrayOfNumbersFromFile(BASE_ROOT_TO_READ + "dados100_mil.txt");
-//        CombSort.sort(numbers, FACTOR);
-//        System.out.println(CombSort.getInfo());
-//        recordInfoOntoFile(Arrays.toString(numbers), "Sorting 100000 numbers: factor " + FACTOR, BASE_ROOT_TO_WRITE + "dados100_mil.txt");
-//        //-----------------------------------------------------
-//        message("Sorting dados500_mil.txt: Comb Sort with factor " + FACTOR);
-//        numbers = getArrayOfNumbersFromFile(BASE_ROOT_TO_READ + "dados500_mil.txt");
-//        CombSort.sort(numbers, FACTOR);
-//        System.out.println(CombSort.getInfo());
-//        recordInfoOntoFile(Arrays.toString(numbers), "Sorting 500000 numbers: factor " + FACTOR, BASE_ROOT_TO_WRITE + "dados500_mil.txt");
-//    }
-//
-//    private static void message(String text) {
-//        System.out.println("--------------------------------------------------");
-//        System.out.println(text);
-//        System.out.println("--------------------------------------------------");
-//    }
-//
-//    private static void recordInfoOntoFile(String sortedArray, String title, String filePath) {
-//        File newFile = new File(filePath);
-//        try {
-//            newFile.createNewFile(); //If the file exists or not, we don't care about it!
-//            FileHandler.writeOver(filePath, title + "\nTime-stamping: " + LocalDateTime.now() +"\n## Comb so" +
-//                    "rt ##\n" + CombSort.getInfo() + "\n## Ordered data set ##: " + sortedArray);
-//        }catch(IOException | SecurityException e) {
-//            System.out.println("########### Something went bad! ############");
-//            System.exit(-1);
-//        }
+        final double FACTOR = 1;
+        //Root path of the unsorted files.
+        final String ROOT_PATH_UNSORTED_DATA = "src/exercises/unsorted_data/";
+        //Root path to create the new files with sorted data.
+        final String ROOT_PATH_SORTED_DATA = "src/exercises/third_class/comb_sort/factor_one/sorted_data/";
+        int[] numbers; //Array to contain all numbers gotten from the files with unsorted data.
+        System.out.println("Comb Sort Factor 1 Ordination");
+        System.out.println("----------------------------------------------------------------------");
+//        File with 5 numbers.
+        System.out.println("File with 5 numbers");
+        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados5.txt");
+        CombSort.sort(numbers, FACTOR);
+        System.out.println(CombSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados5.txt", numbers, CombSort.getReport());
+//    ----------------------------------------------------------------------------------------------------
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("File with 100 numbers");
+        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados100.txt");
+        CombSort.sort(numbers, FACTOR);
+        System.out.println(CombSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados100.txt", numbers, CombSort.getReport());
+//     ----------------------------------------------------------------------------------------------------
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("File with 1000 numbers");
+        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados1000.txt");
+        CombSort.sort(numbers, FACTOR);
+        System.out.println(CombSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados1000.txt", numbers, CombSort.getReport());
+//     ----------------------------------------------------------------------------------------------------
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("File with 10000 numbers");
+        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados10_mil.txt");
+        CombSort.sort(numbers, FACTOR);
+        System.out.println(CombSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados10_mil.txt", numbers, CombSort.getReport());
+//     ----------------------------------------------------------------------------------------------------
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("File with 50000 numbers");
+        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados50_mil.txt");
+        CombSort.sort(numbers, FACTOR);
+        System.out.println(CombSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados50_mil.txt", numbers, CombSort.getReport());
+//     ----------------------------------------------------------------------------------------------------
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("File with 100000 numbers");
+        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados100_mil.txt");
+        CombSort.sort(numbers, FACTOR);
+        System.out.println(CombSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados100_mil.txt", numbers, CombSort.getReport());
+//     ----------------------------------------------------------------------------------------------------
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("File with 500000 numbers");
+        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados500_mil.txt");
+        CombSort.sort(numbers, FACTOR);
+        System.out.println(CombSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados500_mil.txt", numbers, CombSort.getReport());
+//     ----------------------------------------------------------------------------------------------------
     }
 }

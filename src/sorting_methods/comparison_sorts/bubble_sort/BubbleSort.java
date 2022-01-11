@@ -7,7 +7,7 @@ package sorting_methods.comparison_sorts.bubble_sort;
 import time_measurement.Time;
 
 public class BubbleSort {
-    private static String info;
+    private static StringBuilder report;
 
     public static void sort(int[] numbers) {
         Time.startCounting();
@@ -38,8 +38,12 @@ public class BubbleSort {
             comparisons++; //Line 17.
         }
         Time.finishCounting();
-        info = String.format("Elements: %d%nMovements: %d%nComparisons: %d%nTime spent: %s",numbers.length, moves,
-                comparisons, Time.getTime());
+        report = new StringBuilder();
+        report.append("Bubble Sort\n");
+        report.append("Size of the input: ").append(numbers.length).append("\n");
+        report.append("Comparisons: ").append(comparisons).append("\n");
+        report.append("Moves: ").append(moves).append("\n");
+        report.append("Time (HH:MM:SS:mm): ").append(Time.getTime());
     }
 
     public static void sort2(int[] numbers) { //Another implementation using do/while.
@@ -47,16 +51,15 @@ public class BubbleSort {
         boolean goOn;
         do {
             goOn = false;
-            for (int i = 0; i < k - 1; i++) {
+            for (int i = 0; i < k - 1; i++)
                 if (numbers[i] > numbers[i + 1]) {
                     aux = numbers[i];
                     numbers[i] = numbers[i + 1];
                     numbers[i + 1] = aux;
                     goOn = true;
                 }
-            }
         } while (goOn);
     }
 
-    public static String getInfo(){ return info; }
+    public static String getReport(){ return report.toString(); }
 }

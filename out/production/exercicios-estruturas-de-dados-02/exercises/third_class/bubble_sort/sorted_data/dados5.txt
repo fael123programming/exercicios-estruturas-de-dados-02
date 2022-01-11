@@ -1,8 +1,7 @@
-Sorting 5 numbers
-Time-stamping: 2021-11-02T07:55:08.961669700
-## Bubble sort ##
-Elements: 5
-Movements: 15
+Bubble Sort
+Size of the input: 5
 Comparisons: 27
-Time spent: 0:0:0:0
-## Ordered data set ##: [-13805, 3724, 3945, 5371, 16190]
+Moves: 15
+Time (HH:MM:SS:mm): 0:0:0:0
+Sorted array: 
+[-13805, 3724, 3945, 5371, 16190]

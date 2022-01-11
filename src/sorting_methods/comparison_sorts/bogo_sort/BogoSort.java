@@ -1,11 +1,10 @@
 package sorting_methods.comparison_sorts.bogo_sort;
 
 import time_measurement.Time;
-
 import java.util.Random;
 
 public class BogoSort {
-    private static String info;
+    private static StringBuilder report;
 
     public static void sort(int[] numbers) {
         Time.startCounting();
@@ -40,11 +39,15 @@ public class BogoSort {
             comparisons++; //Line 17.
         }
         Time.finishCounting();
-        info = String.format("Elements: %d%nMovements: %d%nComparisons: %d%nTime spent: %s",numbers.length, moves,
-                comparisons, Time.getTime());
+        report = new StringBuilder();
+        report.append("Bogo Sort\n");
+        report.append("Size of the input: ").append(numbers.length).append("\n");
+        report.append("Comparisons: ").append(comparisons).append("\n");
+        report.append("Moves: ").append(moves).append("\n");
+        report.append("Time (HH:MM:SS:mm): ").append(Time.getTime());
     }
 
-    public static String getInfo(){
-        return info;
+    public static String getReport(){
+        return report.toString();
     }
 }

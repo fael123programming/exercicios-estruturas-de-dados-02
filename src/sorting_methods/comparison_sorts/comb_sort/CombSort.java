@@ -7,7 +7,7 @@ package sorting_methods.comparison_sorts.comb_sort;
 import time_measurement.Time;
 
 public class CombSort {
-    private static String info;
+    private static StringBuilder report;
 
     public static void sort(int[] numbers, double factor) {
         Time.startCounting();
@@ -40,9 +40,13 @@ public class CombSort {
             comparisons += 2; //Line 18.
         }
         Time.finishCounting();
-        info = String.format("Elements: %d%nMovements: %d%nComparisons: %d%nTime spent: %s",numbers.length, moves,
-                comparisons, Time.getTime());
+        report = new StringBuilder();
+        report.append("Comb Sort: factor ").append(factor).append("\n");
+        report.append("Size of the input: ").append(numbers.length).append("\n");
+        report.append("Comparisons: ").append(comparisons).append("\n");
+        report.append("Moves: ").append(moves).append("\n");
+        report.append("Time (HH:MM:SS:mm): ").append(Time.getTime());
     }
 
-    public static String getInfo(){ return info; }
+    public static String getReport(){ return report.toString(); }
 }

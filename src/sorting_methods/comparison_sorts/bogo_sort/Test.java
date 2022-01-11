@@ -12,6 +12,6 @@ public class Test {
         System.out.println(Arrays.toString(numbers));
         BogoSort.sort(numbers);
         System.out.println(Arrays.toString(numbers));
-        System.out.println(BogoSort.getInfo());
+        System.out.println(BogoSort.getReport());
     }
 }

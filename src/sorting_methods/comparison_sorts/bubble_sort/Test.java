@@ -9,7 +9,7 @@ public class Test {
         System.out.println(Arrays.toString(numbers));
         BubbleSort.sort(numbers);
         System.out.println(Arrays.toString(numbers));
-        System.out.println(BubbleSort.getInfo());
+        System.out.println(BubbleSort.getReport());
         SelectionSort.sort(new int[]{10, 9, 8, 7, 6, 5, 4, 3, 2, 1});
         System.out.println(SelectionSort.getReport());
         BubbleSort.sort(new int[]{1, 9, 123});
