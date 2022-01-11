@@ -3,37 +3,42 @@ package sorting_methods.comparison_sorts.selection_sort;
 import time_measurement.Time;
 
 public class SelectionSort {
-    private String info;
+    private static StringBuilder report;
 
-    public void order(int[] numbers) {
-        long numberOfMoves = 0, numberOfComparisons = 0;
+    public static void sort(int[] numbers) {
+        long moves = 0, comparisons = 0;
         Time.startCounting();
         int aux, posMin;
-        numberOfComparisons++;
+        comparisons++;
         for (int i = 0; i < numbers.length - 1; i++) {
             posMin = i;
-            numberOfComparisons++;
+            comparisons++;
             for (int j = i + 1; j < numbers.length; j++) {
-                numberOfComparisons++;
+                comparisons++;
                 if (numbers[j] < numbers[posMin]) {
                     posMin = j;
                 }
-                numberOfComparisons++;
+                comparisons++;
             }
-            numberOfComparisons++;
+            comparisons++;
             if (i != posMin) {
                 aux = numbers[i];
                 numbers[i] = numbers[posMin];
                 numbers[posMin] = aux;
-                numberOfMoves += 3;
+                moves += 3;
             }
-            numberOfComparisons++;
+            comparisons++;
         }
         Time.finishCounting();
-        this.info = "Number of moves: " + numberOfMoves + "\nNumber of comparisons: " + numberOfComparisons + "\nTime spent: " + Time.getTime();
+        report = new StringBuilder();
+        report.append("Selection Sort\n");
+        report.append("Size of the input: ").append(numbers.length).append("\n");
+        report.append("Comparisons: ").append(comparisons).append("\n");
+        report.append("Moves: ").append(moves).append("\n");
+        report.append("Time (HH:MM:SS:mm): ").append(Time.getTime());
     }
 
-    public String getInfo(){
-        return this.info;
+    public static String getReport(){
+        return report.toString();
     }
 }

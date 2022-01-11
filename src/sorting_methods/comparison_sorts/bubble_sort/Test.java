@@ -1,7 +1,6 @@
 package sorting_methods.comparison_sorts.bubble_sort;
 
 import sorting_methods.comparison_sorts.selection_sort.SelectionSort;
-
 import java.util.Arrays;
 
 public class Test {
@@ -11,9 +10,8 @@ public class Test {
         BubbleSort.sort(numbers);
         System.out.println(Arrays.toString(numbers));
         System.out.println(BubbleSort.getInfo());
-        SelectionSort selectionSort = new SelectionSort();
-        selectionSort.order(new int[]{10, 9, 8, 7, 6, 5, 4, 3, 2, 1});
-        System.out.println(selectionSort.getInfo());
+        SelectionSort.sort(new int[]{10, 9, 8, 7, 6, 5, 4, 3, 2, 1});
+        System.out.println(SelectionSort.getReport());
         BubbleSort.sort(new int[]{1, 9, 123});
         //This is the best case!
         //The execution flow will stop at the first repetition due flag variable 'aux'.
