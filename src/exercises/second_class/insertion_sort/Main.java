@@ -1,6 +1,6 @@
 package exercises.second_class.insertion_sort;
 
-import exercises.aux_class.AuxiliarClass;
+import exercises.fourth_class.AuxiliarClass;
 import sorting_methods.insertion_sort.InsertionSort;
 
 public class Main {

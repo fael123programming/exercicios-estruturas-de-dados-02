@@ -1,6 +1,6 @@
 package exercises.third_class.bubble_sort;
 
-import exercises.aux_class.AuxiliarClass;
+import exercises.fourth_class.AuxiliarClass;
 import sorting_methods.bubble_sort.BubbleSort;
 
 public class Main {

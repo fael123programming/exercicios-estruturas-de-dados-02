@@ -1,6 +1,6 @@
 package exercises.third_class.comb_sort.factor_one;
 
-import exercises.aux_class.AuxiliarClass;
+import exercises.fourth_class.AuxiliarClass;
 import sorting_methods.comb_sort.CombSort;
 
 public class Main {

@@ -1,6 +1,6 @@
 package exercises.sixth_class.radix_sort.msd;
 
-import exercises.aux_class.AuxiliarClass;
+import exercises.fourth_class.AuxiliarClass;
 import sorting_methods.key_based_sorts.radix_sort.RadixSort;
 
 public class Main {

@@ -1,6 +1,6 @@
 package exercises.third_class.bogo_sort;
 
-import exercises.aux_class.AuxiliarClass;
+import exercises.fourth_class.AuxiliarClass;
 import sorting_methods.bogo_sort.BogoSort;
 
 public class Main {

@@ -1,6 +1,6 @@
 package exercises.sixth_class.gnome_sort;
 
-import exercises.aux_class.AuxiliarClass;
+import exercises.fourth_class.AuxiliarClass;
 import sorting_methods.gnome_sort.GnomeSort;
 
 public class Main {

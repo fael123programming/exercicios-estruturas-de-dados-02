@@ -1,6 +1,6 @@
 package exercises.sixth_class.counting_sort;
 
-import exercises.aux_class.AuxiliarClass;
+import exercises.fourth_class.AuxiliarClass;
 import sorting_methods.key_based_sorts.counting_sort.CountingSort;
 
 public class Main {

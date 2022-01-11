@@ -1,6 +1,6 @@
 package exercises.fourth_class.quick_sort;
 
-import exercises.aux_class.AuxiliarClass;
+import exercises.fourth_class.AuxiliarClass;
 import sorting_methods.quick_sort.QuickSort;
 
 public class Main {
