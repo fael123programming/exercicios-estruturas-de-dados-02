@@ -1,7 +1,7 @@
 package exercises.second_class.insertion_sort;
 
 import exercises.aux_class.AuxiliarClass;
-import sorting_methods.comparison_sorts.insertion_sort.InsertionSort;
+import sorting_methods.insertion_sort.InsertionSort;
 
 public class Main {
     public static void main(String[] args) {

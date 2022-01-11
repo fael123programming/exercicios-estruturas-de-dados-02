@@ -1,7 +1,7 @@
 package exercises.third_class.bogo_sort;
 
 import exercises.aux_class.AuxiliarClass;
-import sorting_methods.comparison_sorts.bogo_sort.BogoSort;
+import sorting_methods.bogo_sort.BogoSort;
 
 public class Main {
     public static void main(String[] args) {

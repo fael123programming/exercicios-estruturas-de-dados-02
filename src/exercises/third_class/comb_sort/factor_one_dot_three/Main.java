@@ -1,7 +1,7 @@
 package exercises.third_class.comb_sort.factor_one_dot_three;
 
 import exercises.aux_class.AuxiliarClass;
-import sorting_methods.comparison_sorts.comb_sort.CombSort;
+import sorting_methods.comb_sort.CombSort;
 
 public class Main {
     public static void main(String[] args) {

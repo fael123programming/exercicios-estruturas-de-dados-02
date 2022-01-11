@@ -1,7 +1,7 @@
 package exercises.fourth_class.merge_sort;
 
 import exercises.aux_class.AuxiliarClass;
-import sorting_methods.comparison_sorts.merge_sort.MergeSort;
+import sorting_methods.merge_sort.MergeSort;
 
 public class Main {
     public static void main(String[] args) {

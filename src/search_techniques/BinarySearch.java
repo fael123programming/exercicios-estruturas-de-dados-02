@@ -1,7 +1,7 @@
 package search_techniques;
 
 import java.util.LinkedList;
-import sorting_methods.comparison_sorts.binary_insertion_sort.Number;
+import sorting_methods.binary_insertion_sort.Number;
 
 public class BinarySearch {
 	public static int search(LinkedList<Integer> list, int wanted) {

@@ -1,7 +1,7 @@
 package exercises.second_class.selection_sort;
 
 import exercises.aux_class.AuxiliarClass;
-import sorting_methods.comparison_sorts.selection_sort.SelectionSort;
+import sorting_methods.selection_sort.SelectionSort;
 
 public class Main {
     public static void main(String[] args) {

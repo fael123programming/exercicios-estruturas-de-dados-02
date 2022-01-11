@@ -1,7 +1,7 @@
 package exercises.sixth_class.gnome_sort;
 
 import exercises.aux_class.AuxiliarClass;
-import sorting_methods.comparison_sorts.gnome_sort.GnomeSort;
+import sorting_methods.gnome_sort.GnomeSort;
 
 public class Main {
     public static void main(String[] args) {
