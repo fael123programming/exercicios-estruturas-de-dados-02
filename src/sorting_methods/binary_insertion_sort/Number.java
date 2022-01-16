@@ -1,8 +1,8 @@
 package sorting_methods.binary_insertion_sort;
 
 public class Number {
-    private int value;
-    private char identity;
+    private final int value;
+    private final char identity;
 
     public Number(int value, char identity) {
         this.value = value;

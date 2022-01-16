@@ -8,7 +8,7 @@ public class Test {
         for (int i = 0; i < 200000000; i++)
             numbers[i] = 200000000 - i;
         Time.startCounting();
-        TimSort.sort(numbers);
+        CocktailSort.sort(numbers);
         Time.finishCounting();
         System.out.println(Time.getTime());
 //      It spent about to 11 secs to sort 200,000,000 numbers

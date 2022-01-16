@@ -6,6 +6,6 @@ public class GreatestValue {
     }
 
     private static int gr(int a, int b) {
-        return a > b ? a : b;
+        return Math.max(a, b);
     }
 }

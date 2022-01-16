@@ -1,16 +1,16 @@
-package exercises.seventh_class.tim_sort;
+package exercises.seventh_class.cocktail_sort;
 
 import exercises.fourth_class.AuxiliarClass;
-import sorting_methods.tim_sort.CocktailSort;
+import sorting_methods.cocktail_sort.CocktailSort;
 
 public class Main {
     public static void main(String[] args) {
         //Root path of the unsorted files.
         final String ROOT_PATH_UNSORTED_DATA = "src/exercises/unsorted_data/";
         //Root path to create the new files with sorted data.
-        final String ROOT_PATH_SORTED_DATA = "src/exercises/seventh_class/tim_sort/sorted_data/";
+        final String ROOT_PATH_SORTED_DATA = "src/exercises/seventh_class/cocktail_sort/sorted_data/";
         int[] numbers; //Array to contain all numbers gotten from the files with unsorted data.
-        System.out.println("Tim Sort Ordination");
+        System.out.println("Cocktail Sort");
         System.out.println("----------------------------------------------------------------------");
 //        File with 5 numbers.
         System.out.println("File with 5 numbers");

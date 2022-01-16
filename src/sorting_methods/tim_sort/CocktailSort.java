@@ -13,7 +13,7 @@ package sorting_methods.tim_sort;
 
 import time_measurement.Time;
 
-public class TimSort {
+public class CocktailSort {
     private static final int MIN_MERGE = 32;
     private static StringBuilder report;
     private static long moves, comparisons;
