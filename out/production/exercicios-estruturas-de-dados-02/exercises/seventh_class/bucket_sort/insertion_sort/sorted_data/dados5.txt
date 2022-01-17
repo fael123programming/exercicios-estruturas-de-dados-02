@@ -1,0 +1,7 @@
+Bucket Sort with Insertion Sort
+Size of the input: 5
+Comparisons: 83
+Moves: 24
+Time (HH:MM:SS:mm): 0:0:0:1
+Sorted array: 
+[-13805, 3724, 3945, 5371, 16190]
