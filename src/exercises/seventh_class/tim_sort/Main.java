@@ -1,7 +1,7 @@
 package exercises.seventh_class.tim_sort;
 
 import exercises.fourth_class.AuxiliarClass;
-import sorting_methods.tim_sort.CocktailSort;
+import sorting_methods.tim_sort.TimSort;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,51 +15,51 @@ public class Main {
 //        File with 5 numbers.
         System.out.println("File with 5 numbers");
         numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados5.txt");
-        CocktailSort.sort(numbers);
-        System.out.println(CocktailSort.getReport());
-        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados5.txt", numbers, CocktailSort.getReport());
+        TimSort.sort(numbers);
+        System.out.println(TimSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados5.txt", numbers, TimSort.getReport());
 //    ----------------------------------------------------------------------------------------------------
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 100 numbers");
         numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados100.txt");
-        CocktailSort.sort(numbers);
-        System.out.println(CocktailSort.getReport());
-        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados100.txt", numbers, CocktailSort.getReport());
+        TimSort.sort(numbers);
+        System.out.println(TimSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados100.txt", numbers, TimSort.getReport());
 //     ----------------------------------------------------------------------------------------------------
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 1000 numbers");
         numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados1000.txt");
-        CocktailSort.sort(numbers);
-        System.out.println(CocktailSort.getReport());
-        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados1000.txt", numbers, CocktailSort.getReport());
+        TimSort.sort(numbers);
+        System.out.println(TimSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados1000.txt", numbers, TimSort.getReport());
 //     ----------------------------------------------------------------------------------------------------
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 10000 numbers");
         numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados10_mil.txt");
-        CocktailSort.sort(numbers);
-        System.out.println(CocktailSort.getReport());
-        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados10_mil.txt", numbers, CocktailSort.getReport());
+        TimSort.sort(numbers);
+        System.out.println(TimSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados10_mil.txt", numbers, TimSort.getReport());
 //     ----------------------------------------------------------------------------------------------------
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 50000 numbers");
         numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados50_mil.txt");
-        CocktailSort.sort(numbers);
-        System.out.println(CocktailSort.getReport());
-        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados50_mil.txt", numbers, CocktailSort.getReport());
+        TimSort.sort(numbers);
+        System.out.println(TimSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados50_mil.txt", numbers, TimSort.getReport());
 //     ----------------------------------------------------------------------------------------------------
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 100000 numbers");
         numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados100_mil.txt");
-        CocktailSort.sort(numbers);
-        System.out.println(CocktailSort.getReport());
-        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados100_mil.txt", numbers, CocktailSort.getReport());
+        TimSort.sort(numbers);
+        System.out.println(TimSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados100_mil.txt", numbers, TimSort.getReport());
 //     ----------------------------------------------------------------------------------------------------
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 500000 numbers");
         numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados500_mil.txt");
-        CocktailSort.sort(numbers);
-        System.out.println(CocktailSort.getReport());
-        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados500_mil.txt", numbers, CocktailSort.getReport());
+        TimSort.sort(numbers);
+        System.out.println(TimSort.getReport());
+        AuxiliarClass.recordInfoIntoFile(ROOT_PATH_SORTED_DATA + "dados500_mil.txt", numbers, TimSort.getReport());
 //     ----------------------------------------------------------------------------------------------------
     }
 }

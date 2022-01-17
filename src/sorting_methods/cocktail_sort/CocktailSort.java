@@ -24,7 +24,7 @@ public class CocktailSort {
             if (left == right)
                 break;
             comparisons++;
-            for (int i = right - 1; i > left; i--) {
+            for (int i = right - 1; i >= left; i--) {
                 comparisons++;
                 if (numbers[i] > numbers[i + 1]) {
                     swap(numbers, i, i + 1);

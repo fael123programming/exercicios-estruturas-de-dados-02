@@ -13,14 +13,14 @@ package sorting_methods.tim_sort;
 
 import time_measurement.Time;
 
-public class CocktailSort {
-    private static final int MIN_MERGE = 32;
+public class TimSort {
+    public static final int MIN_MERGE = 32;
     private static StringBuilder report;
     private static long moves, comparisons;
 
     public static void sort(int[] numbers) {
         Time.startCounting();
-        int minRun = minRunLength(MIN_MERGE); //minRun tells us the step we will run through our main array.
+        int minRun = minRunLength(MIN_MERGE); //minRun tells us the step we will run through our main array. 16
         comparisons++;
         for (int i = 0; i < numbers.length; i += minRun) {
             insertionSort(numbers, i, Math.min(i + MIN_MERGE - 1, numbers.length - 1));
@@ -60,7 +60,7 @@ public class CocktailSort {
      * @return the size of each sub-array to divide the main array. It will never be greater
      * than MIN_MERGE
      */
-    private static int minRunLength(int value) {
+    public static int minRunLength(int value) {
         if (value < 0)
             throw new IllegalArgumentException("Value " + value + " must be non-negative");
         int aux = 0;
