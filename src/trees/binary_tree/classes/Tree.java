@@ -15,6 +15,25 @@ public class Tree {
         this.root = root;
     }
 
+    public boolean isEmpty() {
+        return this.root == null;
+    }
+
+    public int size() {
+        Counter counter = new Counter();
+        count(counter, this.root);
+        return counter.getNumber();
+    }
+
+    private void count(Counter counter, Node root) {
+        if (root == null)
+            return;
+        else
+            counter.incrementNumber();
+        count(counter, root.getRightChild());
+        count(counter, root.getLeftChild());
+    }
+
     public void print() {
         printRecursive(this.root);
     }
@@ -56,8 +75,13 @@ public class Tree {
         return root;
     }
 
-    public Node delete(int value) {
-        return deleteRecursive(this.root, value);
+    public boolean delete(int value) {
+        if (isEmpty())
+            return false;
+         if (search(value) == null)
+             return false; //Element does not exist...
+        deleteRecursive(this.root, value);
+        return true; //Element does exist and was removed, presumably...
     }
 
     private Node deleteRecursive(Node root, int value) {
@@ -67,22 +91,26 @@ public class Tree {
             root.setLeftChild(deleteRecursive(root.getLeftChild(), value));
         else if (root.getInfo() < value)
             root.setRightChild(deleteRecursive(root.getRightChild(), value));
-        else if (root.getRightChild() == null && root.getLeftChild() == null)
-            root = null;
-        else if (root.getLeftChild() == null) {
-            Node newNode = root;
-            root = root.getRightChild();
-        } else if (root.getRightChild() == null) {
-            Node newNode = root;
-            root = root.getLeftChild();
-        } else {
-            Node newNode = root.getLeftChild();
-            while (newNode.getRightChild() != null)
-                newNode = newNode.getRightChild();
-            root.setInfo(newNode.getInfo());
-            newNode.setInfo(value);
-            root.setLeftChild(deleteRecursive(root.getLeftChild(), value));
+        else { //We have found the wanted element...
+            if (root.getLeftChild() == null && root.getRightChild() == null) //It has no children...
+                root = null;
+             else if (root.getLeftChild() == null) //It has only one child...
+                root = root.getRightChild();
+             else if (root.getRightChild() == null) //It has only one child...
+                 root = root.getLeftChild();
+             else { //It has two children...
+                 Node temp = findMin(root.getRightChild());
+                 root.setInfo(temp.getInfo());
+                 root.setRightChild(deleteRecursive(root.getRightChild(), temp.getInfo()));
+            }
         }
         return root;
+    }
+
+    private Node findMin(Node root) {
+        if (root.getLeftChild() == null)
+            return root;
+        else
+            return findMin(root.getLeftChild());
     }
 }
