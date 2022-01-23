@@ -1,7 +1,6 @@
 package sorting_methods.binary_insertion_sort;
 
 import search_techniques.BinarySearch;
-
 import java.util.LinkedList;
 
 public class BinaryInsertionSort {
