@@ -37,4 +37,12 @@ public class Node {
     public void setLeftChild(Node leftChild) {
         this.leftChild = leftChild;
     }
+
+    public boolean hasLeftChild() {
+        return this.leftChild != null;
+    }
+
+    public boolean hasRightChild() {
+        return this.rightChild != null;
+    }
 }

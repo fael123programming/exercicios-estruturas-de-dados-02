@@ -7,7 +7,11 @@ public class Counter {
         return number;
     }
 
-    public void incrementNumber() {
+    public void increment() {
         this.number++;
+    }
+
+    public void setZero() {
+        this.number = 0;
     }
 }
