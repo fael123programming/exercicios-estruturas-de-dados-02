@@ -1,4 +1,4 @@
-package trees.binary_tree.exceptions;
+package trees.binary_tree.notbalanced.exceptions;
 
 public class EmptyTreeException extends RuntimeException {
     public EmptyTreeException() {

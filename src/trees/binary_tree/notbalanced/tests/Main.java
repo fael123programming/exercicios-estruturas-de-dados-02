@@ -1,6 +1,6 @@
-package trees.binary_tree.tests;
+package trees.binary_tree.notbalanced.tests;
 
-import trees.binary_tree.classes.*;
+import trees.binary_tree.notbalanced.classes.*;
 
 public class Main {
     public static void main(String[] args) {

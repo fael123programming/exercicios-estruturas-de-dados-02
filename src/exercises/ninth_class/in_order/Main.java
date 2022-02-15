@@ -2,7 +2,7 @@ package exercises.ninth_class.in_order;
 
 import exercises.fourth_class.AuxiliarClass;
 import time_measurement.Time;
-import trees.binary_tree.classes.BinaryTree;
+import trees.binary_tree.notbalanced.classes.BinaryTree;
 
 public class Main {
     public static void main(String[] args) {

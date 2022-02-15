@@ -1,4 +1,4 @@
-package trees.binary_tree.classes;
+package trees.binary_tree.notbalanced.classes;
 
 public class Counter {
     private int number;

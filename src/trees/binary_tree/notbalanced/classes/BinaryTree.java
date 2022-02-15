@@ -1,6 +1,6 @@
-package trees.binary_tree.classes;
+package trees.binary_tree.notbalanced.classes;
 
-import trees.binary_tree.exceptions.*;
+import trees.binary_tree.notbalanced.exceptions.*;
 
 public class BinaryTree {
     private Node root;
@@ -100,22 +100,22 @@ public class BinaryTree {
             return searchRecursive(node.getRightChild(), value);
     }
 
-    public void insert(int[] numbers) {
-        if (numbers == null)
+    public void insert(int[] elements) {
+        if (elements == null)
             throw new IllegalArgumentException("numbers must be not null");
-        for (int i : numbers)
+        for (int i : elements)
             this.insert(i);
     }
 
-    public void insert(int info) {
-        Node toInsert = new Node(info);
+    public void insert(int element) {
+        Node toInsert = new Node(element);
         if (isEmpty())
             this.root = toInsert;
         else
             insertRecursive(this.root, toInsert);
     }
 
-    private Node insertRecursive(Node root, Node toInsert) {
+    protected Node insertRecursive(Node root, Node toInsert) {
         if (root == null)
             root = toInsert;
         else if (toInsert.getInfo() < root.getInfo())
@@ -130,20 +130,19 @@ public class BinaryTree {
             this.root = null;
     }
 
-
-    public void delete(int value) {
-         if (search(value) == null)
-             throw new ElementDoesNotExistException(value);
-        deleteRecursive(this.root, value);
+    public void delete(int element) {
+         if (search(element) == null)
+             throw new ElementDoesNotExistException(element);
+        deleteRecursive(this.root, element);
     }
 
-    private Node deleteRecursive(Node root, int value) {
+    protected Node deleteRecursive(Node root, int element) {
         if (root == null)
             return null;
-        else if (root.getInfo() > value)
-            root.setLeftChild(deleteRecursive(root.getLeftChild(), value));
-        else if (root.getInfo() < value)
-            root.setRightChild(deleteRecursive(root.getRightChild(), value));
+        else if (root.getInfo() > element)
+            root.setLeftChild(deleteRecursive(root.getLeftChild(), element));
+        else if (root.getInfo() < element)
+            root.setRightChild(deleteRecursive(root.getRightChild(), element));
         else { //We have found the wanted element...
             if (root.getLeftChild() == null && root.getRightChild() == null) //It has no children...
                 root = null;

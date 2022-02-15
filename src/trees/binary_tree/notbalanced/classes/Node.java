@@ -1,14 +1,8 @@
-package trees.binary_tree.classes;
+package trees.binary_tree.notbalanced.classes;
 
 public class Node {
     private int info;
     private Node rightChild, leftChild;
-
-    public Node(int info, Node leftChild, Node rightChild) {
-        this.info = info;
-        this.leftChild = leftChild;
-        this.rightChild = rightChild;
-    }
 
     public Node(int info) {
         this.info = info;
@@ -37,12 +31,5 @@ public class Node {
     public void setLeftChild(Node leftChild) {
         this.leftChild = leftChild;
     }
-
-    public boolean hasLeftChild() {
-        return this.leftChild != null;
-    }
-
-    public boolean hasRightChild() {
-        return this.rightChild != null;
-    }
 }
+
