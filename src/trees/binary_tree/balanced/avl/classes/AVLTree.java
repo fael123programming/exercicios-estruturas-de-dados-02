@@ -1,16 +1,18 @@
 package trees.binary_tree.balanced.avl.classes;
 
+import trees.binary_tree.notbalanced.classes.BinaryTree;
+import trees.binary_tree.notbalanced.classes.Node;
 
-public class AVLTree {
-    private AVLNode root;
+public class AVLTree<T extends Comparable<T>> extends BinaryTree<T> {
+    private AVLNode<T> root;
 
-    public AVLTree(int rootValue) {
-        this.root = new AVLNode(rootValue);
+    public AVLTree(T rootValue) {
+        this.root = new AVLNode<>(rootValue);
     }
 
     public AVLTree() {}
 
-    public AVLNode getRoot() {
+    public AVLNode<T> getRoot() {
         return this.root;
     }
 
@@ -18,17 +20,21 @@ public class AVLTree {
         return this.root == null;
     }
 
-    public void insert(int element) {
-        if (this.isEmpty())
-            this.root = new AVLNode(element);
+    @Override
+    public Node<T> insertRecursive(Node<T> node, Node<T> toInsert) {
+        if (node == null)
+            node = toInsert;
+        else if (toInsert.getInfo().compareTo(node.getInfo()) < 0)
+            node.setLeftChild(insertRecursive(node.getLeftChild(), toInsert));
         else
-            insertRecursive();
+            node.setRightChild(insertRecursive(node.getRightChild(), toInsert));
+        return node;
+        this.updateHeight(node);
     }
 
-    private AVLNode insertRecursive(AVLNode node, AVLNode toInsert) {
+    private void updateHeight(Node<T> node) {
 
     }
-
 
     private void LLRotation(AVLNode node) {
         AVLNode auxiliaryNode = node.getLeftChild();

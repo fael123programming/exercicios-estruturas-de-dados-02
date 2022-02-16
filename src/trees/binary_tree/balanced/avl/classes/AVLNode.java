@@ -1,18 +1,19 @@
 package trees.binary_tree.balanced.avl.classes;
 
-public class AVLNode {
-    private int info, height;
-    private AVLNode leftChild, rightChild;
+import trees.binary_tree.notbalanced.classes.Node;
 
-    public AVLNode(int info) {
-        this.info = info;
+public class AVLNode<T extends Comparable<T>>  extends Node<T> {
+    private int height;
+
+    public AVLNode(T info) {
+        super(info);
     }
 
-    public int getInfo() {
+    public T getInfo() {
         return this.info;
     }
 
-    public void setInfo(int info) {
+    public void setInfo(T info) {
         this.info = info;
     }
 
@@ -24,28 +25,28 @@ public class AVLNode {
         this.height = height;
     }
 
-    public AVLNode getLeftChild() {
+    public Node<T> getLeftChild() {
         return this.leftChild;
     }
 
-    public void setLeftChild(AVLNode leftChild) {
+    public void setLeftChild(AVLNode<T> leftChild) {
         this.leftChild = leftChild;
     }
 
-    public AVLNode getRightChild() {
+    public Node<T> getRightChild() {
         return this.rightChild;
     }
 
-    public void setRightChild(AVLNode rightChild) {
+    public void setRightChild(AVLNode<T> rightChild) {
         this.rightChild = rightChild;
     }
 
     public int getBalancingFactor() {
         int leftChildHeight = 0, rightChildHeight = 0;
         if (this.hasLeftChild())
-            leftChildHeight = this.leftChild.height;
+            leftChildHeight = ((AVLNode<T>) this.getLeftChild()).getHeight();
         if (this.hasRightChild())
-            rightChildHeight = this.rightChild.height;
+            rightChildHeight = ((AVLNode<T>) this.getRightChild()).getHeight();
         return Math.abs(leftChildHeight - rightChildHeight);
     }
 

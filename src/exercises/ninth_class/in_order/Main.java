@@ -6,9 +6,9 @@ import trees.binary_tree.notbalanced.classes.BinaryTree;
 
 public class Main {
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree(); //Our binary tree to contain all numbers from the files...
+        BinaryTree<Integer> tree = new BinaryTree<>(); //Our binary tree to contain all numbers from the files...
         final String ROOT_PATH_UNSORTED_DATA = "src/exercises/unsorted_data/"; //Root path of the unsorted files.
-        int[] numbers; //Array to contain all numbers gotten from the files.
+        Integer[] numbers; //Array to contain all numbers gotten from the files.
         System.out.println("Printing the data in-order");
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 5 numbers");

@@ -1,34 +1,34 @@
 package trees.binary_tree.notbalanced.classes;
 
-public class Node {
-    private int info;
-    private Node rightChild, leftChild;
+public class Node<T extends Comparable<T>> {
+    protected T info;
+    protected Node<T> rightChild, leftChild;
 
-    public Node(int info) {
+    public Node(T info) {
         this.info = info;
     }
 
-    public int getInfo() {
+    public T getInfo() {
         return this.info;
     }
 
-    public void setInfo(int info) {
+    public void setInfo(T info) {
         this.info = info;
     }
 
-    public Node getRightChild() {
+    public Node<T> getRightChild() {
         return this.rightChild;
     }
 
-    public void setRightChild(Node rightChild) {
+    public void setRightChild(Node<T> rightChild) {
         this.rightChild = rightChild;
     }
 
-    public Node getLeftChild() {
+    public Node<T> getLeftChild() {
         return this.leftChild;
     }
 
-    public void setLeftChild(Node leftChild) {
+    public void setLeftChild(Node<T> leftChild) {
         this.leftChild = leftChild;
     }
 }
