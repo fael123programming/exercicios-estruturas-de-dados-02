@@ -1,155 +1,33 @@
 package trees.binary_tree.classes;
 
-import trees.extra.exceptions.*;
-import trees.extra.counter.Counter;
+import trees.binary_tree.abstractstructure.AbstractBinaryTree;
+import trees.binary_tree.abstractstructure.AbstractNode;
 
-public class BinaryTree<T extends Comparable<T>> {
-    private Node<T> root;
-    public final static int IN_ORDER = 0, PREFIX = -1, POSTFIX = 1;
+public class BinaryTree<T extends Comparable<T>> extends AbstractBinaryTree<T> {
+    public BinaryTree(T rootData) {
+        super(rootData);
+    }
 
     public BinaryTree() {}
 
-    public BinaryTree(T value) {
-        this.root = new Node<>(value);
-    }
-
-    public Node<T> getRoot() {
-        return this.root;
-    }
-
-    public boolean isEmpty() {
-        return this.root == null;
-    }
-
-    public int nodes() {
-        Counter counter = new Counter();
-        count(counter, this.root);
-        return counter.getNumber();
-    }
-
-    public void print() throws EmptyTreeException {
-        this.checkTreeIsEmpty();
-        printInOrder(this.root);
-    }
-
-    public void print(int mode) throws EmptyTreeException, IllegalArgumentException {
-        this.checkTreeIsEmpty();
-        switch(mode) {
-            case BinaryTree.IN_ORDER -> printInOrder(this.root);
-            case BinaryTree.POSTFIX -> printPostfix(this.root);
-            case BinaryTree.PREFIX -> printPrefix(this.root);
-            default -> throw new IllegalArgumentException("unknown mode " + mode + " for printing");
-        }
-    }
-
-    public Node<T> search(T value) throws EmptyTreeException, IllegalArgumentException {
-        this.checkTreeIsEmpty();
-        this.checkNull(value);
-        return searchRecursive(this.root, value);
-    }
-
-    public void insert(T[] elements) throws IllegalArgumentException {
-        this.checkNull(elements);
-        for (T t : elements) {
-            this.checkNull(t);
-            this.insert(t);
-        }
-    }
-
-    public void insert(T data) {
-        this.checkNull(data);
-        Node<T> toInsert = new Node<>(data);
-        if (this.isEmpty())
-            this.root = toInsert;
-        else
-            insertRecursive(this.root, toInsert);
-    }
-
-    public void clean() {
-        if (this.root != null)
-            this.root = null;
-    }
-
-    public void delete(T element) {
-         if (this.search(element) == null)
-             throw new ElementDoesNotExistException();
-        deleteRecursive(this.root, element);
-    }
-
-    public T getMax() throws EmptyTreeException{
-        this.checkTreeIsEmpty();
-        return this.getMax(this.root);
-    }
-
-    public T getMin() throws EmptyTreeException {
-        this.checkTreeIsEmpty();
-        return this.getMin(this.root);
-    }
-
-    private void count(Counter counter, Node<T> root) {
-        if (root == null)
-            return;
-        counter.increment();
-        count(counter, root.getRightChild());
-        count(counter, root.getLeftChild());
-    }
-
-    private void checkTreeIsEmpty() throws EmptyTreeException {
-        if (this.isEmpty())
-            throw new EmptyTreeException();
-    }
-
-    private void checkNull(Object obj) throws IllegalArgumentException {
-        if (obj == null)
-            throw new IllegalArgumentException("null argument passed");
-    }
-
-    private void printInOrder(Node<T> aNode) {
-        if (aNode == null)
-            return;
-        printInOrder(aNode.getLeftChild());
-        System.out.println(aNode.getData());
-        printInOrder(aNode.getRightChild());
-    }
-
-    private void printPostfix(Node<T> aNode) {
-        if (aNode == null)
-            return;
-        printPostfix(aNode.getRightChild());
-        printPostfix(aNode.getLeftChild());
-        System.out.println(aNode.getData());
-    }
-
-    private void printPrefix(Node<T> aNode) {
-        if (aNode == null)
-            return;
-        System.out.println(aNode.getData());
-        printPrefix(aNode.getLeftChild());
-        printPrefix(aNode.getRightChild());
-    }
-
-    private Node<T> searchRecursive(Node<T> node, T value) {
+    @Override
+    protected AbstractNode<T> insertRecursive(AbstractNode<T> node, T data) {
         if (node == null)
-            return null;
-        if (node.getData() == value)
-            return node;
-        else if (node.getData().compareTo(value) > 0)
-            return searchRecursive(node.getLeftChild(), value);
+            node = this.castDataToNodeImplementation(data);
+        else if (data.compareTo(node.getData()) < 0)
+            node.setLeftChild(this.insertRecursive(node.getLeftChild(), data));
         else
-            return searchRecursive(node.getRightChild(), value);
-    }
-
-    private Node<T> insertRecursive(Node<T> node, Node<T> toInsert) {
-        if (node == null)
-            node = toInsert;
-        else if (toInsert.getData().compareTo(node.getData()) < 0)
-            node.setLeftChild(insertRecursive(node.getLeftChild(), toInsert));
-        else
-            node.setRightChild(insertRecursive(node.getRightChild(), toInsert));
+            node.setRightChild(this.insertRecursive(node.getRightChild(), data));
         return node;
     }
 
-    private Node<T> deleteRecursive(Node<T> node, T element) {
+    @Override
+    protected AbstractNode<T> castDataToNodeImplementation(T data) {
+        return data != null ? new Node<>(data) : null;
+    }
+
+    @Override
+    protected AbstractNode<T> deleteRecursive(AbstractNode<T> node, T element) {
         if (node == null)
             return null;
         else if (node.getData().compareTo(element) > 0)
@@ -170,19 +48,5 @@ public class BinaryTree<T extends Comparable<T>> {
             }
         }
         return node;
-    }
-
-    private T getMin(Node<T> node) {
-        this.checkNull(node);
-        while(node.hasLeftChild())
-            node = node.getLeftChild();
-        return node.getData();
-    }
-
-    private T getMax(Node<T> node) {
-        this.checkNull(node);
-        while (node.hasRightChild())
-            node = node.getRightChild();
-        return node.getData();
     }
 }

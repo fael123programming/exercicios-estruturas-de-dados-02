@@ -1,5 +1,8 @@
 package trees.binary_tree.balanced.blackred;
 
-public class BlackRedTree<T extends Comparable<T>> {
+import trees.binary_tree.abstractstructure.AbstractBinaryTree;
+
+public class BlackRedTree<T extends Comparable<T>> extends AbstractBinaryTree<T> {
+
 
 }
