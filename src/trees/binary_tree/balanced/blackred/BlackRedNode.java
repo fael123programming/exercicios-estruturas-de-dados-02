@@ -1,7 +1,6 @@
 package trees.binary_tree.balanced.blackred;
 
 import trees.binary_tree.abstractstructure.AbstractNode;
-import trees.binary_tree.balanced.avl.Color;
 
 public class BlackRedNode<T extends Comparable<T>> extends AbstractNode<T> {
     private Color color;
