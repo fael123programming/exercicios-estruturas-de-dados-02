@@ -1,4 +1,4 @@
-package trees.binary_tree.notbalanced.classes;
+package trees.extra.node;
 
 public class Node<T extends Comparable<T>> {
     private T data;

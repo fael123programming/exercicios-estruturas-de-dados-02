@@ -2,8 +2,8 @@ package exercises.tenthclass.postfix;
 
 import exercises.fourth_class.AuxiliarClass;
 import time_measurement.Time;
-import trees.binary_tree.abstractstructure.Tree;
-import trees.binary_tree.balanced.avl.classes.AVLTree;
+import trees.abstractstructure.Tree;
+import trees.binary_tree.balanced.avl.AVLTree;
 
 public class Main {
     public static void main(String[] args) {

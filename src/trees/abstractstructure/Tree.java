@@ -1,8 +1,8 @@
-package trees.binary_tree.abstractstructure;
+package trees.abstractstructure;
 
-import trees.binary_tree.notbalanced.classes.Node;
-import trees.binary_tree.notbalanced.exceptions.ElementDoesNotExistException;
-import trees.binary_tree.notbalanced.exceptions.EmptyTreeException;
+import trees.extra.node.Node;
+import trees.extra.exceptions.ElementDoesNotExistException;
+import trees.extra.exceptions.EmptyTreeException;
 
 public interface Tree<T extends Comparable<T>> {
     int IN_ORDER = 0, PREFIX = -1, POSTFIX = 1;

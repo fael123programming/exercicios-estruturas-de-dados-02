@@ -1,4 +1,4 @@
-package trees.binary_tree.notbalanced.exceptions;
+package trees.extra.exceptions;
 
 public class ElementDoesNotExistException extends RuntimeException {
     public ElementDoesNotExistException() {

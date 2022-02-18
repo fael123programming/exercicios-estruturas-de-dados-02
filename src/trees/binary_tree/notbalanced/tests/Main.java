@@ -1,10 +1,11 @@
 package trees.binary_tree.notbalanced.tests;
 
-import trees.binary_tree.notbalanced.classes.*;
+import trees.binary_tree.notbalanced.binarytree.BinaryTree;
+import trees.binary_tree.notbalanced.binarytree.classes.*;
 
 public class Main {
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree();
+        BinaryTree<Integer> tree = new BinaryTree<>();
         tree.insert(8);
         tree.insert(4);
         tree.insert(12);

@@ -1,7 +1,9 @@
-package trees.binary_tree.notbalanced.classes;
+package trees.binary_tree.notbalanced.binarytree;
 
-import trees.binary_tree.abstractstructure.Tree;
-import trees.binary_tree.notbalanced.exceptions.*;
+import trees.abstractstructure.Tree;
+import trees.extra.exceptions.*;
+import trees.extra.counter.Counter;
+import trees.extra.node.Node;
 
 public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
     private Node<T> root;

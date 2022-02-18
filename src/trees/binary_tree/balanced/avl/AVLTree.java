@@ -1,10 +1,10 @@
-package trees.binary_tree.balanced.avl.classes;
+package trees.binary_tree.balanced.avl;
 
-import trees.binary_tree.abstractstructure.Tree;
-import trees.binary_tree.notbalanced.classes.Counter;
-import trees.binary_tree.notbalanced.classes.Node;
-import trees.binary_tree.notbalanced.exceptions.ElementDoesNotExistException;
-import trees.binary_tree.notbalanced.exceptions.EmptyTreeException;
+import trees.abstractstructure.Tree;
+import trees.extra.counter.Counter;
+import trees.extra.node.Node;
+import trees.extra.exceptions.ElementDoesNotExistException;
+import trees.extra.exceptions.EmptyTreeException;
 
 public class AVLTree<T extends Comparable<T>> implements Tree<T> {
     private Node<T> root;
