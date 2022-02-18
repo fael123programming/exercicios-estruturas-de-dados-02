@@ -2,7 +2,6 @@ package exercises.tenthclass.prefix;
 
 import exercises.fourth_class.AuxiliarClass;
 import time_measurement.Time;
-import trees.abstractstructure.Tree;
 import trees.binary_tree.balanced.avl.AVLTree;
 
 public class Main {
@@ -19,7 +18,7 @@ public class Main {
         numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados5.txt");
         avlTree.insert(numbers);
         Time.startCounting();
-        avlTree.print(Tree.PREFIX);
+        avlTree.print(AVLTree.PREFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -30,7 +29,7 @@ public class Main {
         avlTree.clean();
         avlTree.insert(numbers);
         Time.startCounting();
-        avlTree.print(Tree.PREFIX);
+        avlTree.print(AVLTree.PREFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -41,7 +40,7 @@ public class Main {
         avlTree.clean();
         avlTree.insert(numbers);
         Time.startCounting();
-        avlTree.print(Tree.PREFIX);
+        avlTree.print(AVLTree.PREFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -52,7 +51,7 @@ public class Main {
         avlTree.clean();
         avlTree.insert(numbers);
         Time.startCounting();
-        avlTree.print(Tree.PREFIX);
+        avlTree.print(AVLTree.PREFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -63,7 +62,7 @@ public class Main {
         avlTree.clean();
         avlTree.insert(numbers);
         Time.startCounting();
-        avlTree.print(Tree.PREFIX);
+        avlTree.print(AVLTree.PREFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -74,7 +73,7 @@ public class Main {
         avlTree.clean();
         avlTree.insert(numbers);
         Time.startCounting();
-        avlTree.print(Tree.PREFIX);
+        avlTree.print(AVLTree.PREFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -85,7 +84,7 @@ public class Main {
         avlTree.clean();
         avlTree.insert(numbers);
         Time.startCounting();
-        avlTree.print(Tree.PREFIX);
+        avlTree.print(AVLTree.PREFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());

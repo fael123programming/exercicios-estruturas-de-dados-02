@@ -6,7 +6,7 @@ import trees.extra.exceptions.EmptyTreeException;
 
 public class AVLTree<T extends Comparable<T>> {
     private AVLNode<T> root;
-    public final static int IN_ORDER = 0, PREFIX = -1, POSTFIX = 1;
+    public static final int IN_ORDER = 0, PREFIX = -1, POSTFIX = 1;
 
     public AVLTree(T rootValue) {
         this.root = new AVLNode<>(rootValue);
