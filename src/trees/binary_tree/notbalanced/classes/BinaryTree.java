@@ -1,6 +1,6 @@
 package trees.binary_tree.notbalanced.classes;
 
-import trees.abstracttree.Tree;
+import trees.binary_tree.abstractstructure.Tree;
 import trees.binary_tree.notbalanced.exceptions.*;
 
 public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
@@ -28,23 +28,15 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
         return counter.getNumber();
     }
 
-    private void count(Counter counter, Node<T> root) {
-        if (root == null)
-            return;
-        counter.increment();
-        count(counter, root.getRightChild());
-        count(counter, root.getLeftChild());
-    }
-
     @Override
     public void print() throws EmptyTreeException {
-        checkWhetherTreeIsEmpty();
+        this.checkTreeIsEmpty();
         printInOrder(this.root);
     }
 
     @Override
-    public void print(int mode) throws EmptyTreeException {
-        checkWhetherTreeIsEmpty();
+    public void print(int mode) throws EmptyTreeException, IllegalArgumentException {
+        this.checkTreeIsEmpty();
         switch(mode) {
             case BinaryTree.IN_ORDER -> printInOrder(this.root);
             case BinaryTree.POSTFIX -> printPostfix(this.root);
@@ -53,16 +45,80 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
         }
     }
 
-    private void checkWhetherTreeIsEmpty() throws EmptyTreeException {
-        if (isEmpty())
+    @Override
+    public Node<T> search(T value) throws EmptyTreeException, IllegalArgumentException {
+        this.checkTreeIsEmpty();
+        this.checkNull(value);
+        return searchRecursive(this.root, value);
+    }
+
+    @Override
+    public void insert(T[] elements) throws IllegalArgumentException {
+        this.checkNull(elements);
+        for (T t : elements) {
+            this.checkNull(t);
+            this.insert(t);
+        }
+    }
+
+    @Override
+    public void insert(T data) {
+        this.checkNull(data);
+        Node<T> toInsert = new Node<>(data);
+        if (this.isEmpty())
+            this.root = toInsert;
+        else
+            insertRecursive(this.root, toInsert);
+    }
+
+    @Override
+    public void clean() {
+        if (this.root != null)
+            this.root = null;
+    }
+
+    @Override
+    public void delete(T element) {
+         if (this.search(element) == null)
+             throw new ElementDoesNotExistException();
+        deleteRecursive(this.root, element);
+    }
+
+    @Override
+    public T getMax() throws EmptyTreeException{
+        this.checkTreeIsEmpty();
+        return this.getMax(this.root);
+    }
+
+    @Override
+    public T getMin() throws EmptyTreeException {
+        this.checkTreeIsEmpty();
+        return this.getMin(this.root);
+    }
+
+    private void count(Counter counter, Node<T> root) {
+        if (root == null)
+            return;
+        counter.increment();
+        count(counter, root.getRightChild());
+        count(counter, root.getLeftChild());
+    }
+
+    private void checkTreeIsEmpty() throws EmptyTreeException {
+        if (this.isEmpty())
             throw new EmptyTreeException();
+    }
+
+    private void checkNull(Object obj) throws IllegalArgumentException {
+        if (obj == null)
+            throw new IllegalArgumentException("null argument passed");
     }
 
     private void printInOrder(Node<T> aNode) {
         if (aNode == null)
             return;
         printInOrder(aNode.getLeftChild());
-        System.out.println(aNode.getInfo());
+        System.out.println(aNode.getData());
         printInOrder(aNode.getRightChild());
     }
 
@@ -71,80 +127,45 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
             return;
         printPostfix(aNode.getRightChild());
         printPostfix(aNode.getLeftChild());
-        System.out.println(aNode.getInfo());
+        System.out.println(aNode.getData());
     }
 
     private void printPrefix(Node<T> aNode) {
         if (aNode == null)
             return;
-        System.out.println(aNode.getInfo());
+        System.out.println(aNode.getData());
         printPrefix(aNode.getLeftChild());
         printPrefix(aNode.getRightChild());
-    }
-
-
-    @Override
-    public Node<T> search(T value) throws EmptyTreeException {
-        checkWhetherTreeIsEmpty();
-        return searchRecursive(this.root, value);
     }
 
     private Node<T> searchRecursive(Node<T> node, T value) {
         if (node == null)
             return null;
-        if (node.getInfo() == value)
+        if (node.getData() == value)
             return node;
-        else if (node.getInfo().compareTo(value) > 0)
+        else if (node.getData().compareTo(value) > 0)
             return searchRecursive(node.getLeftChild(), value);
         else
             return searchRecursive(node.getRightChild(), value);
     }
 
-    @Override
-    public void insert(T[] elements) {
-        if (elements == null)
-            throw new IllegalArgumentException("elements must be not null");
-        for (T t : elements)
-            this.insert(t);
-    }
-
-    @Override
-    public void insert(T element) {
-        Node<T> toInsert = new Node<>(element);
-        if (this.isEmpty())
-            this.root = toInsert;
-        else
-            insertRecursive(this.root, toInsert);
-    }
-
-    protected Node<T> insertRecursive(Node<T> node, Node<T> toInsert) {
+    private Node<T> insertRecursive(Node<T> node, Node<T> toInsert) {
         if (node == null)
             node = toInsert;
-        else if (toInsert.getInfo().compareTo(node.getInfo()) < 0)
+        else if (toInsert.getData().compareTo(node.getData()) < 0)
             node.setLeftChild(insertRecursive(node.getLeftChild(), toInsert));
         else
             node.setRightChild(insertRecursive(node.getRightChild(), toInsert));
         return node;
     }
 
-    public void clean() {
-        if (this.root != null)
-            this.root = null;
-    }
-
-    public void delete(T element) {
-         if (this.search(element) == null)
-             throw new ElementDoesNotExistException();
-        deleteRecursive(this.root, element);
-    }
-
-    protected Node<T> deleteRecursive(Node<T> node, T element) {
+    private Node<T> deleteRecursive(Node<T> node, T element) {
         if (node == null)
             return null;
-        else if (node.getInfo().compareTo(element) > 0)
-            node.setLeftChild(deleteRecursive(node.getLeftChild(), element));
-        else if (node.getInfo().compareTo(element) < 0)
-            node.setRightChild(deleteRecursive(node.getRightChild(), element));
+        else if (node.getData().compareTo(element) > 0)
+            node.setLeftChild(this.deleteRecursive(node.getLeftChild(), element));
+        else if (node.getData().compareTo(element) < 0)
+            node.setRightChild(this.deleteRecursive(node.getRightChild(), element));
         else { //We have found the wanted element...
             if (node.getLeftChild() == null && node.getRightChild() == null) //It has no children...
                 node = null;
@@ -153,18 +174,25 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
              else if (node.getRightChild() == null) //It has only one child...
                  node = node.getLeftChild();
              else { //It has two children...
-                 Node<T> temp = findMin(node.getRightChild()); //Find the successor of the element to be deleted.
-                 node.setInfo(temp.getInfo());
-                 node.setRightChild(deleteRecursive(node.getRightChild(), temp.getInfo()));
+                 //Find the successor of the element to be deleted.
+                 node.setData(this.getMin(node.getRightChild()));
+                 node.setRightChild(this.deleteRecursive(node.getRightChild(), node.getData()));
             }
         }
         return node;
     }
 
-    private Node<T> findMin(Node<T> node) {
-        if (node.getLeftChild() == null)
-            return node;
-        else
-            return findMin(node.getLeftChild());
+    private T getMin(Node<T> node) {
+        this.checkNull(node);
+        while(node.hasLeftChild())
+            node = node.getLeftChild();
+        return node.getData();
+    }
+
+    private T getMax(Node<T> node) {
+        this.checkNull(node);
+        while (node.hasRightChild())
+            node = node.getRightChild();
+        return node.getData();
     }
 }

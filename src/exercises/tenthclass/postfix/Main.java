@@ -1,22 +1,25 @@
-package exercises.ninth_class.prefix;
+package exercises.tenthclass.postfix;
 
 import exercises.fourth_class.AuxiliarClass;
 import time_measurement.Time;
-import trees.binary_tree.notbalanced.classes.BinaryTree;
+import trees.binary_tree.abstractstructure.Tree;
+import trees.binary_tree.balanced.avl.classes.AVLTree;
 
 public class Main {
     public static void main(String[] args) {
-        BinaryTree<Integer> tree = new BinaryTree<>(); //Our binary tree to contain all numbers from the files...
+        AVLTree<Integer> avlTree = new AVLTree<>(); //Our binary tree to contain all numbers from the files...
         final String ROOT_PATH_UNSORTED_DATA = "src/exercises/unsorted_data/"; //Root path of the unsorted files.
         Integer[] numbers; //Array to contain all numbers gotten from the files.
-        System.out.println("Printing the data in prefix way");
+        System.out.println("AVL Tree: Balanced Binary Search Tree");
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("Printing the data in postfix way");
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 5 numbers");
         System.out.println("----------------------------------------------------------------------");
         numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados5.txt");
-        tree.insert(numbers);
+        avlTree.insert(numbers);
         Time.startCounting();
-        tree.print(BinaryTree.PREFIX);
+        avlTree.print(Tree.POSTFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -24,10 +27,10 @@ public class Main {
         System.out.println("File with 100 numbers");
         System.out.println("----------------------------------------------------------------------");
         numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados100.txt");
-        tree.clean();
-        tree.insert(numbers);
+        avlTree.clean();
+        avlTree.insert(numbers);
         Time.startCounting();
-        tree.print(BinaryTree.PREFIX);
+        avlTree.print(Tree.POSTFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -35,10 +38,10 @@ public class Main {
         System.out.println("File with 1000 numbers");
         System.out.println("----------------------------------------------------------------------");
         numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados1000.txt");
-        tree.clean();
-        tree.insert(numbers);
+        avlTree.clean();
+        avlTree.insert(numbers);
         Time.startCounting();
-        tree.print(BinaryTree.PREFIX);
+        avlTree.print(Tree.POSTFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -46,10 +49,10 @@ public class Main {
         System.out.println("File with 10000 numbers");
         System.out.println("----------------------------------------------------------------------");
         numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados10_mil.txt");
-        tree.clean();
-        tree.insert(numbers);
+        avlTree.clean();
+        avlTree.insert(numbers);
         Time.startCounting();
-        tree.print(BinaryTree.PREFIX);
+        avlTree.print(Tree.POSTFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -57,10 +60,10 @@ public class Main {
         System.out.println("File with 50000 numbers");
         System.out.println("----------------------------------------------------------------------");
         numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados50_mil.txt");
-        tree.clean();
-        tree.insert(numbers);
+        avlTree.clean();
+        avlTree.insert(numbers);
         Time.startCounting();
-        tree.print(BinaryTree.PREFIX);
+        avlTree.print(Tree.POSTFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -68,10 +71,10 @@ public class Main {
         System.out.println("File with 100000 numbers");
         System.out.println("----------------------------------------------------------------------");
         numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados100_mil.txt");
-        tree.clean();
-        tree.insert(numbers);
+        avlTree.clean();
+        avlTree.insert(numbers);
         Time.startCounting();
-        tree.print(BinaryTree.PREFIX);
+        avlTree.print(Tree.POSTFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());
@@ -79,10 +82,10 @@ public class Main {
         System.out.println("File with 500000 numbers");
         System.out.println("----------------------------------------------------------------------");
         numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados500_mil.txt");
-        tree.clean();
-        tree.insert(numbers);
+        avlTree.clean();
+        avlTree.insert(numbers);
         Time.startCounting();
-        tree.print(BinaryTree.PREFIX);
+        avlTree.print(Tree.POSTFIX);
         Time.finishCounting();
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Time spent: " + Time.getTime());

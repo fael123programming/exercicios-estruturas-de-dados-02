@@ -1,19 +1,24 @@
 package trees.binary_tree.notbalanced.classes;
 
 public class Node<T extends Comparable<T>> {
-    protected T info;
-    protected Node<T> rightChild, leftChild;
+    private T data;
+    private int height;
+    private Node<T> rightChild, leftChild;
 
-    public Node(T info) {
-        this.info = info;
+    {
+        height = 1;
     }
 
-    public T getInfo() {
-        return this.info;
+    public Node(T data) {
+        this.data = data;
     }
 
-    public void setInfo(T info) {
-        this.info = info;
+    public T getData() {
+        return this.data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 
     public Node<T> getRightChild() {
@@ -30,6 +35,38 @@ public class Node<T extends Comparable<T>> {
 
     public void setLeftChild(Node<T> leftChild) {
         this.leftChild = leftChild;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getBalancingFactor() {
+        return this.getLeftChildHeight() - this.getRightChildHeight();
+    }
+
+    public boolean hasLeftChild() {
+        return this.getLeftChild() != null;
+    }
+
+    public boolean hasRightChild() {
+        return this.getRightChild() != null;
+    }
+
+    public int getLeftChildHeight() {
+        if (!this.hasLeftChild())
+            return 0;
+        return this.leftChild.height;
+    }
+
+    public int getRightChildHeight() {
+        if (!this.hasRightChild())
+            return 0;
+        return this.rightChild.height;
     }
 }
 

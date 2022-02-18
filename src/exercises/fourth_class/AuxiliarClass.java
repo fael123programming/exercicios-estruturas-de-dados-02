@@ -13,7 +13,7 @@ public class AuxiliarClass {
      * @param filePath the path of the file to be accessed
      * @return an array comprised of all numbers found in the file at filePath
      */
-    public static Integer[] getNumbersInFile(String filePath) {
+    public static Integer[] getNumbersInFile2(String filePath) {
         try (InputStream fileInputStream = new FileInputStream(filePath);
              InputStreamReader reader = new InputStreamReader(fileInputStream);
              BufferedReader buffer = new BufferedReader(reader)
@@ -33,6 +33,28 @@ public class AuxiliarClass {
             System.out.println("An IOException was thrown when trying to access the file at " + filePath);
         }
         return new Integer[]{}; //Unreachable statement.
+    }
+
+    public static int[] getNumbersInFile(String filePath) {
+        try (InputStream fileInputStream = new FileInputStream(filePath);
+             InputStreamReader reader = new InputStreamReader(fileInputStream);
+             BufferedReader buffer = new BufferedReader(reader)
+        ) {
+            StringBuilder fileData = new StringBuilder();
+            buffer.lines().forEach(fileData::append); //method reference.
+            fileData.deleteCharAt(0).deleteCharAt(fileData.length() - 1); //Taking '[' and ']' out.
+            String[] numbersStr = fileData.toString().split(", ");
+            int[] numbers = new int[numbersStr.length];
+            for(int i = 0; i < numbers.length; i++)
+                numbers[i] = Integer.parseInt(numbersStr[i]);
+            return numbers;
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("A file at " + filePath + " does not exist");
+            System.out.println("Check it out");
+        } catch (IOException ioe) {
+            System.out.println("An IOException was thrown when trying to access the file at " + filePath);
+        }
+        return new int[]{}; //Unreachable statement.
     }
 
     /**

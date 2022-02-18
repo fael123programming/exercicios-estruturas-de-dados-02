@@ -13,7 +13,7 @@ public class Main {
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 5 numbers");
         System.out.println("----------------------------------------------------------------------");
-        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados5.txt");
+        numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados5.txt");
         tree.insert(numbers);
         Time.startCounting();
         tree.print();
@@ -23,7 +23,7 @@ public class Main {
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 100 numbers");
         System.out.println("----------------------------------------------------------------------");
-        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados100.txt");
+        numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados100.txt");
         tree.clean();
         tree.insert(numbers);
         Time.startCounting();
@@ -34,7 +34,7 @@ public class Main {
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 1000 numbers");
         System.out.println("----------------------------------------------------------------------");
-        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados1000.txt");
+        numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados1000.txt");
         tree.clean();
         tree.insert(numbers);
         Time.startCounting();
@@ -45,7 +45,7 @@ public class Main {
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 10000 numbers");
         System.out.println("----------------------------------------------------------------------");
-        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados10_mil.txt");
+        numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados10_mil.txt");
         tree.clean();
         tree.insert(numbers);
         Time.startCounting();
@@ -56,7 +56,7 @@ public class Main {
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 50000 numbers");
         System.out.println("----------------------------------------------------------------------");
-        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados50_mil.txt");
+        numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados50_mil.txt");
         tree.clean();
         tree.insert(numbers);
         Time.startCounting();
@@ -67,7 +67,7 @@ public class Main {
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 100000 numbers");
         System.out.println("----------------------------------------------------------------------");
-        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados100_mil.txt");
+        numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados100_mil.txt");
         tree.clean();
         tree.insert(numbers);
         Time.startCounting();
@@ -78,7 +78,7 @@ public class Main {
         System.out.println("----------------------------------------------------------------------");
         System.out.println("File with 500000 numbers");
         System.out.println("----------------------------------------------------------------------");
-        numbers = AuxiliarClass.getNumbersInFile(ROOT_PATH_UNSORTED_DATA + "dados500_mil.txt");
+        numbers = AuxiliarClass.getNumbersInFile2(ROOT_PATH_UNSORTED_DATA + "dados500_mil.txt");
         tree.clean();
         tree.insert(numbers);
         Time.startCounting();
