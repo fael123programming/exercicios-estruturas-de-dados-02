@@ -16,10 +16,10 @@ public class AVLTree<T extends Comparable<T>> extends AbstractBinaryTree<T> {
             return this.castDataToNodeImplementation(data);
         if (data.compareTo(node.getData()) < 0)
             node.setLeftChild(this.insertRecursive(node.getLeftChild(), data));
-        else if (data.compareTo(node.getData()) > 0)
+        else /*if (data.compareTo(node.getData()) > 0)*/
             node.setRightChild(this.insertRecursive(node.getRightChild(), data));
-        else
-            return node;
+//        else
+//            return node;
         this.updateHeight((AVLNode<T>) node);
         return this.applyRotation((AVLNode<T>) node);
     }
