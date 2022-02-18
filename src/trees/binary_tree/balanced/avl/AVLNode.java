@@ -1,15 +1,15 @@
-package trees.extra.node;
+package trees.binary_tree.balanced.avl;
 
-public class Node<T extends Comparable<T>> {
+public class AVLNode<T extends Comparable<T>> {
     private T data;
     private int height;
-    private Node<T> rightChild, leftChild;
+    private AVLNode<T> rightChild, leftChild;
 
     {
         height = 1;
     }
 
-    public Node(T data) {
+    public AVLNode(T data) {
         this.data = data;
     }
 
@@ -21,19 +21,19 @@ public class Node<T extends Comparable<T>> {
         this.data = data;
     }
 
-    public Node<T> getRightChild() {
+    public AVLNode<T> getRightChild() {
         return this.rightChild;
     }
 
-    public void setRightChild(Node<T> rightChild) {
+    public void setRightChild(AVLNode<T> rightChild) {
         this.rightChild = rightChild;
     }
 
-    public Node<T> getLeftChild() {
+    public AVLNode<T> getLeftChild() {
         return this.leftChild;
     }
 
-    public void setLeftChild(Node<T> leftChild) {
+    public void setLeftChild(AVLNode<T> leftChild) {
         this.leftChild = leftChild;
     }
 
@@ -69,4 +69,3 @@ public class Node<T extends Comparable<T>> {
         return this.rightChild.height;
     }
 }
-

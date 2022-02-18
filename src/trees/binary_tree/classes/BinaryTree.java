@@ -1,12 +1,11 @@
-package trees.binary_tree.notbalanced.binarytree;
+package trees.binary_tree.classes;
 
-import trees.abstractstructure.Tree;
 import trees.extra.exceptions.*;
 import trees.extra.counter.Counter;
-import trees.extra.node.Node;
 
-public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
+public class BinaryTree<T extends Comparable<T>> {
     private Node<T> root;
+    public final static int IN_ORDER = 0, PREFIX = -1, POSTFIX = 1;
 
     public BinaryTree() {}
 
@@ -18,25 +17,21 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
         return this.root;
     }
 
-    @Override
     public boolean isEmpty() {
         return this.root == null;
     }
 
-    @Override
-    public int size() {
+    public int nodes() {
         Counter counter = new Counter();
         count(counter, this.root);
         return counter.getNumber();
     }
 
-    @Override
     public void print() throws EmptyTreeException {
         this.checkTreeIsEmpty();
         printInOrder(this.root);
     }
 
-    @Override
     public void print(int mode) throws EmptyTreeException, IllegalArgumentException {
         this.checkTreeIsEmpty();
         switch(mode) {
@@ -47,14 +42,12 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
         }
     }
 
-    @Override
     public Node<T> search(T value) throws EmptyTreeException, IllegalArgumentException {
         this.checkTreeIsEmpty();
         this.checkNull(value);
         return searchRecursive(this.root, value);
     }
 
-    @Override
     public void insert(T[] elements) throws IllegalArgumentException {
         this.checkNull(elements);
         for (T t : elements) {
@@ -63,7 +56,6 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
         }
     }
 
-    @Override
     public void insert(T data) {
         this.checkNull(data);
         Node<T> toInsert = new Node<>(data);
@@ -73,26 +65,22 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
             insertRecursive(this.root, toInsert);
     }
 
-    @Override
     public void clean() {
         if (this.root != null)
             this.root = null;
     }
 
-    @Override
     public void delete(T element) {
          if (this.search(element) == null)
              throw new ElementDoesNotExistException();
         deleteRecursive(this.root, element);
     }
 
-    @Override
     public T getMax() throws EmptyTreeException{
         this.checkTreeIsEmpty();
         return this.getMax(this.root);
     }
 
-    @Override
     public T getMin() throws EmptyTreeException {
         this.checkTreeIsEmpty();
         return this.getMin(this.root);
