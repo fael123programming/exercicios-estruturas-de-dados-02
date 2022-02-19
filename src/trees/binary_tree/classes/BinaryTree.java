@@ -11,13 +11,13 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractBinaryTree<T> {
     public BinaryTree() {}
 
     @Override
-    protected AbstractNode<T> insertRecursive(AbstractNode<T> node, T data) {
+    protected AbstractNode<T> insertRecursive(AbstractNode<T> node, AbstractNode<T> toInsert) {
         if (node == null)
-            node = this.castDataToNodeImplementation(data);
-        else if (data.compareTo(node.getData()) < 0)
-            node.setLeftChild(this.insertRecursive(node.getLeftChild(), data));
+            node = toInsert;
+        else if (toInsert.getData().compareTo(node.getData()) < 0)
+            node.setLeftChild(this.insertRecursive(node.getLeftChild(), toInsert));
         else
-            node.setRightChild(this.insertRecursive(node.getRightChild(), data));
+            node.setRightChild(this.insertRecursive(node.getRightChild(), toInsert));
         return node;
     }
 

@@ -11,15 +11,13 @@ public class AVLTree<T extends Comparable<T>> extends AbstractBinaryTree<T> {
     public AVLTree() {}
 
     @Override
-    protected AbstractNode<T> insertRecursive(AbstractNode<T> node, T data) {
+    protected AbstractNode<T> insertRecursive(AbstractNode<T> node, AbstractNode<T> toInsert) {
         if (node == null)
-            return this.castDataToNodeImplementation(data);
-        if (data.compareTo(node.getData()) < 0)
-            node.setLeftChild(this.insertRecursive(node.getLeftChild(), data));
-        else /*if (data.compareTo(node.getData()) > 0)*/
-            node.setRightChild(this.insertRecursive(node.getRightChild(), data));
-//        else
-//            return node;
+            return toInsert;
+        if (toInsert.getData().compareTo(node.getData()) < 0)
+            node.setLeftChild(this.insertRecursive(node.getLeftChild(), toInsert));
+        else
+            node.setRightChild(this.insertRecursive(node.getRightChild(), toInsert));
         this.updateHeight((AVLNode<T>) node);
         return this.applyRotation((AVLNode<T>) node);
     }

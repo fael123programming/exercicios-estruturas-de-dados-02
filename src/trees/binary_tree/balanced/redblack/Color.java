@@ -1,4 +1,4 @@
-package trees.binary_tree.balanced.blackred;
+package trees.binary_tree.balanced.redblack;
 
 public enum Color {
     RED(1), BLACK(2);

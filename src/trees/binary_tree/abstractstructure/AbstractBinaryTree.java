@@ -83,7 +83,7 @@ public abstract class AbstractBinaryTree<T extends Comparable<T>> {
             throw new EmptyTreeException();
     }
 
-    private void checkNull(Object obj) throws IllegalArgumentException {
+    protected void checkNull(Object obj) throws IllegalArgumentException {
         if (obj == null)
             throw new IllegalArgumentException("null argument passed");
     }
@@ -97,7 +97,7 @@ public abstract class AbstractBinaryTree<T extends Comparable<T>> {
     private AbstractNode<T> searchRecursive(AbstractNode<T> node, T data) {
         if (node == null)
             return null;
-        if (node.getData() == data)
+        if (node.getData().compareTo(data) == 0)
             return node;
         else if (node.getData().compareTo(data) > 0)
             return this.searchRecursive(node.getLeftChild(), data);
@@ -115,17 +115,18 @@ public abstract class AbstractBinaryTree<T extends Comparable<T>> {
 
     public void insert(T data) {
         this.checkNull(data);
-        this.root = this.insertRecursive(this.root, data);
+        this.root = this.insertRecursive(this.root, this.castDataToNodeImplementation(data));
     }
 
-    protected abstract AbstractNode<T> insertRecursive(AbstractNode<T> node, T data);
+    protected abstract AbstractNode<T> insertRecursive(AbstractNode<T> node, AbstractNode<T> toInsert);
 
     protected abstract AbstractNode<T> castDataToNodeImplementation(T data);
 
-    public void delete(T data) {
+    public void delete(T data) throws ElementDoesNotExistException, EmptyTreeException, IllegalArgumentException {
+        this.checkTreeIsEmpty();
         if (!this.dataExists(data))
             throw new ElementDoesNotExistException();
-        this.deleteRecursive(this.root, data);
+        this.root = this.deleteRecursive(this.root, data);
     }
 
     protected abstract AbstractNode<T> deleteRecursive(AbstractNode<T> node, T data);
