@@ -1,16 +1,17 @@
 package trees.binary_tree.abstractstructure;
 
 import trees.binary_tree.classes.BinaryTree;
-import trees.extra.counter.Counter;
 import trees.extra.exceptions.ElementDoesNotExistException;
 import trees.extra.exceptions.EmptyTreeException;
 
 public abstract class AbstractBinaryTree<T extends Comparable<T>> {
+    protected int nodes;
     protected AbstractNode<T> root;
     public static final int IN_ORDER = 0, POSTFIX = 1, PREFIX = -1;
 
     public AbstractBinaryTree(T rootData) {
         this.root = this.castDataToNodeImplementation(rootData);
+        this.nodes++;
     }
 
     public AbstractBinaryTree() {}
@@ -24,19 +25,7 @@ public abstract class AbstractBinaryTree<T extends Comparable<T>> {
     }
 
     public int nodes() {
-        if (this.isEmpty())
-            return 0;
-        Counter counter = new Counter();
-        this.count(counter, this.root);
-        return counter.getNumber();
-    }
-
-    private void count(Counter counter, AbstractNode<T> root) {
-        if (root == null)
-            return;
-        counter.increment();
-        this.count(counter, root.getRightChild());
-        this.count(counter, root.getLeftChild());
+        return this.nodes;
     }
 
     public void print() throws EmptyTreeException {
@@ -110,12 +99,14 @@ public abstract class AbstractBinaryTree<T extends Comparable<T>> {
         for (T t : elements) {
             this.checkNull(t);
             this.insert(t);
+            this.nodes++;
         }
     }
 
     public void insert(T data) {
         this.checkNull(data);
         this.root = this.insertRecursive(this.root, this.castDataToNodeImplementation(data));
+        this.nodes++;
     }
 
     protected abstract AbstractNode<T> insertRecursive(AbstractNode<T> node, AbstractNode<T> toInsert);
@@ -127,6 +118,7 @@ public abstract class AbstractBinaryTree<T extends Comparable<T>> {
         if (!this.dataExists(data))
             throw new ElementDoesNotExistException();
         this.root = this.deleteRecursive(this.root, data);
+        this.nodes--;
     }
 
     protected abstract AbstractNode<T> deleteRecursive(AbstractNode<T> node, T data);

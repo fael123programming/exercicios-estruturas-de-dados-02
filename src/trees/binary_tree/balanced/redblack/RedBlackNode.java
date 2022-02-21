@@ -3,24 +3,31 @@ package trees.binary_tree.balanced.redblack;
 import trees.binary_tree.abstractstructure.AbstractNode;
 
 public class RedBlackNode<T extends Comparable<T>> extends AbstractNode<T> {
-    private Color color;
+    private int colorNumber; //0: red; 1: black (to reduce memory storage used)
     private RedBlackNode<T> parent;
+    public static final int RED = 0, BLACK = 1;
 
-    public RedBlackNode(T data, Color color) {
+    public RedBlackNode(T data, int colorNumber) {
         super(data);
-        this.color = color;
+        this.assertColorNumberIsValid(colorNumber);
+        this.colorNumber = colorNumber;
     }
 
     public RedBlackNode(T data) {
-        this(data, Color.RED);
+        this(data, RedBlackNode.RED);
     }
 
-    public Color getColor() {
-        return this.color;
+    public String getColor() {
+        return this.colorNumber == 1 ? "BLACK" : "RED";
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public int getColorNumber() {
+        return this.colorNumber;
+    }
+
+    public void setColorNumber(int colorNumber) {
+        this.assertColorNumberIsValid(colorNumber);
+        this.colorNumber = colorNumber;
     }
 
     public RedBlackNode<T> getParent() {
@@ -36,11 +43,16 @@ public class RedBlackNode<T extends Comparable<T>> extends AbstractNode<T> {
     }
 
     public void flipColor() {
-        this.color = this.color == Color.RED ? Color.BLACK : Color.RED;
+        this.colorNumber = this.colorNumber == RedBlackNode.RED ? RedBlackNode.BLACK : RedBlackNode.RED;
     }
 
     @Override
     public String toString() {
         return super.getData() + " " + this.getColor();
+    }
+
+    private void assertColorNumberIsValid(int colorNumber) {
+        if (colorNumber < 0 || colorNumber > 1)
+            throw new IllegalArgumentException("color number " + colorNumber + " is invalid: choose 1 for BLACK and 0 for RED");
     }
 }

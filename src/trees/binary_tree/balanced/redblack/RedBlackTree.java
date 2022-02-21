@@ -11,12 +11,33 @@ public class RedBlackTree<T extends Comparable<T>> extends AbstractBinaryTree<T>
 
     public RedBlackTree() {}
 
+    /**
+     * Inserts new data into the tree maintaining all red-black
+     * properties and constraints.
+     * @param data the new data to be inserted
+     * @throws IllegalArgumentException if data is null
+     */
     @Override
     public void insert(T data) throws IllegalArgumentException {
         super.checkNull(data);
         RedBlackNode<T> toInsert = new RedBlackNode<>(data);
         this.root = this.insertRecursive(this.root, toInsert);
+        super.nodes++;
         this.recolorAndRotate(toInsert);
+    }
+
+    @Override
+    protected AbstractNode<T> insertRecursive(AbstractNode<T> node, AbstractNode<T> toInsert) {
+        if (node == null)
+            return toInsert;
+        if (toInsert.getData().compareTo(node.getData()) < 0) {
+            node.setLeftChild(this.insertRecursive(node.getLeftChild(), toInsert));
+            ((RedBlackNode<T>) node.getLeftChild()).setParent((RedBlackNode<T>) node);
+        } else {
+            node.setRightChild(this.insertRecursive(node.getRightChild(), toInsert));
+            ((RedBlackNode<T>) node.getRightChild()).setParent((RedBlackNode<T>) node);
+        }
+        return node;
     }
 
     /**
@@ -24,15 +45,17 @@ public class RedBlackTree<T extends Comparable<T>> extends AbstractBinaryTree<T>
      * @param node the node where to start recoloring and/or rotating
      */
     private void recolorAndRotate(RedBlackNode<T> node) {
-        ((RedBlackNode<T>) this.root).setColor(Color.BLACK); //It is now BLACK.
+        RedBlackNode<T> treeRoot = (RedBlackNode<T>) this.root;
+        if (treeRoot.getColorNumber() == RedBlackNode.RED)
+            treeRoot.setColorNumber(RedBlackNode.BLACK);
         RedBlackNode<T> nodeParent = node.getParent();
-        if (node == this.root || nodeParent.getColor() == Color.BLACK)
-            return; //There is nothing to do in this case!
+        if (node == this.root || nodeParent.getColorNumber() == RedBlackNode.BLACK)
+            return; //There is nothing to do in this case: until here we encompass the 1st and 2nd case on insertions.
         RedBlackNode<T> nodeGrandParent = nodeParent.getParent();
         RedBlackNode<T> nodeUncle = (RedBlackNode<T>) (nodeParent.isLeftChild() ? nodeGrandParent.getRightChild() : nodeGrandParent.getLeftChild());
-        if (nodeUncle != null && nodeUncle.getColor() == Color.RED) //Recolor going upward the tree.
+        if (nodeUncle != null && nodeUncle.getColorNumber() == RedBlackNode.RED) //Recoloring going upward the tree: it encompasses the 3rd case.
             this.doRecoloring(nodeParent, nodeUncle, nodeGrandParent);
-        else if (nodeParent.isLeftChild())
+        else if (nodeParent.isLeftChild()) //If nodeUncle is null, it is considered to be black. Then we reach the 4th case.
             this.handleLeftSituations(node, nodeParent, nodeGrandParent);
         else
             this.handleRightSituations(node, nodeParent, nodeGrandParent);
@@ -43,22 +66,29 @@ public class RedBlackTree<T extends Comparable<T>> extends AbstractBinaryTree<T>
         nodeUncle.flipColor();
         nodeGrandParent.flipColor();
         this.recolorAndRotate(nodeGrandParent);
+//        After making the recoloring steps, call the method liable for checking when to change color or rotate
+//        but now over the grandparent of the node just inserted.
     }
 
     private void handleLeftSituations(RedBlackNode<T> node, RedBlackNode<T> nodeParent, RedBlackNode<T> nodeGrandParent) {
-        if (!node.isLeftChild())
+        if (!node.isLeftChild()) { //If node is a right child, we`ll do a double right rotation.
             this.leftRotation(nodeParent);
-        nodeParent.flipColor();
+            node.flipColor();
+        } else
+            nodeParent.flipColor();
         nodeGrandParent.flipColor();
         this.rightRotation(nodeGrandParent);
         this.recolorAndRotate(node.isLeftChild() ? nodeParent : nodeGrandParent);
     }
 
     private void handleRightSituations(RedBlackNode<T> node, RedBlackNode<T> nodeParent, RedBlackNode<T> nodeGrandParent) {
-        if (node.isLeftChild())
+//      This method still has problems on recoloring!
+        if (node.isLeftChild()) {
             this.rightRotation(nodeParent);
-        nodeParent.flipColor();
-        nodeGrandParent.flipColor();
+            nodeParent.flipColor();
+            nodeGrandParent.flipColor();
+        } else
+            nodeParent.flipColor();
         this.leftRotation(nodeGrandParent);
         this.recolorAndRotate(node.isLeftChild() ? nodeGrandParent : nodeParent);
     }
@@ -95,20 +125,6 @@ public class RedBlackTree<T extends Comparable<T>> extends AbstractBinaryTree<T>
     }
 
     @Override
-    protected AbstractNode<T> insertRecursive(AbstractNode<T> node, AbstractNode<T> toInsert) {
-        if (node == null)
-            return toInsert;
-        if (toInsert.getData().compareTo(node.getData()) < 0) {
-            node.setLeftChild(this.insertRecursive(node.getLeftChild(), toInsert));
-            ((RedBlackNode<T>) node.getLeftChild()).setParent((RedBlackNode<T>) node);
-        } else {
-            node.setRightChild(this.insertRecursive(node.getRightChild(), toInsert));
-            ((RedBlackNode<T>) node.getRightChild()).setParent((RedBlackNode<T>) node);
-        }
-        return node;
-    }
-
-    @Override
     public AbstractNode<T> castDataToNodeImplementation(T data) {
         return new RedBlackNode<>(data);
     }
@@ -119,7 +135,8 @@ public class RedBlackTree<T extends Comparable<T>> extends AbstractBinaryTree<T>
         if (toDelete == null)
             throw new ElementDoesNotExistException();
         this.root = this.deleteRecursive(this.root, data);
-        if (toDelete.getColor() == Color.RED)
+        this.nodes--;
+        if (toDelete.getColorNumber() == RedBlackNode.RED)
             return; //Deleting red nodes does not require any further change on the tree (recoloring or rotations).
         this.recolorAndRotate(); //Otherwise, it will be necessary to check if the red-black tree rules still hold.
     }

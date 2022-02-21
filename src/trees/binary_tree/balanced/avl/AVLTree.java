@@ -59,7 +59,6 @@ public class AVLTree<T extends Comparable<T>> extends AbstractBinaryTree<T> {
             return this.rightRotation(node);
         }
         if (balancingFactor < -1) { //Apply a left rotation (the case is when we have a right-heavy situation).
-            AVLNode<T> castedRightChild = (AVLNode<T>) node.getRightChild();
             if (((AVLNode<T>) node.getRightChild()).getBalancingFactor() > 0)
                 node.setRightChild(this.rightRotation(node.getRightChild()));
             return this.leftRotation(node);
