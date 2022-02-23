@@ -2,6 +2,7 @@ package trees.tests;
 
 import trees.binary_tree.balanced.redblack.RedBlackNode;
 import trees.binary_tree.balanced.redblack.RedBlackTree;
+
 import java.io.*;
 
 public class Test2 {
@@ -12,10 +13,11 @@ public class Test2 {
         while (true) {
             System.out.println("Testing a red-black tree");
             System.out.println("(1) Insert new value");
-            System.out.println("(2) Search a value");
-            System.out.println("(3) Tree size");
-            System.out.println("(4) Print tree");
-            System.out.println("(5) Exit");
+            System.out.println("(2) Delete a value");
+            System.out.println("(3) Search a value");
+            System.out.println("(4) Tree size");
+            System.out.println("(5) Print tree");
+            System.out.println("(6) Exit");
             System.out.print("-> ");
             option = Integer.parseInt(reader.readLine().split(" ")[0]);
             switch(option) {
@@ -25,7 +27,13 @@ public class Test2 {
                     redBlackTree.insert(value);
                     System.out.println(value + " was inserted");
                 }
-                case 2 ->  {
+                case 2 -> {
+                    System.out.print("Type the value to delete: ");
+                    value = Integer.parseInt(reader.readLine().split(" ")[0]);
+                    redBlackTree.delete(value);
+                    System.out.println(value + " no longer exists in the tree");
+                }
+                case 3 ->  {
                     System.out.print("Type the value to search: ");
                     value = Integer.parseInt(reader.readLine().split(" ")[0]);
                     RedBlackNode<Integer> node = (RedBlackNode<Integer>) redBlackTree.search(value);
@@ -40,13 +48,13 @@ public class Test2 {
                             System.out.println("It's root!");
                     }
                 }
-                case 3 -> {
+                case 4 -> {
                     if (redBlackTree.isEmpty())
                         System.out.println("Tree is empty");
                     else
                         System.out.println("Size: " + redBlackTree.nodes());
                 }
-                case 4 -> {
+                case 5 -> {
                     if (redBlackTree.isEmpty()) {
                         System.out.println("Tree is empty");
                         continue;
@@ -58,7 +66,10 @@ public class Test2 {
                     System.out.println("Root: " + redBlackTree.getRoot());
                     System.out.println("-----------------------------------");
                 }
-                default -> { return; }
+                case 6 -> { return; }
+                default -> {
+                    System.out.println("Unknown option");
+                }
             }
         }
     }

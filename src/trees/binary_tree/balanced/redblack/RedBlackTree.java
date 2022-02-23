@@ -2,7 +2,6 @@ package trees.binary_tree.balanced.redblack;
 
 import trees.binary_tree.abstractstructure.AbstractBinaryTree;
 import trees.binary_tree.abstractstructure.AbstractNode;
-import trees.extra.exceptions.ElementDoesNotExistException;
 
 public class RedBlackTree<T extends Comparable<T>> extends AbstractBinaryTree<T> {
     public RedBlackTree(T data) {
@@ -82,13 +81,12 @@ public class RedBlackTree<T extends Comparable<T>> extends AbstractBinaryTree<T>
     }
 
     private void handleRightSituations(RedBlackNode<T> node, RedBlackNode<T> nodeParent, RedBlackNode<T> nodeGrandParent) {
-//      This method still has problems on recoloring!
         if (node.isLeftChild()) {
             this.rightRotation(nodeParent);
-            nodeParent.flipColor();
-            nodeGrandParent.flipColor();
+            node.flipColor();
         } else
             nodeParent.flipColor();
+        nodeGrandParent.flipColor();
         this.leftRotation(nodeGrandParent);
         this.recolorAndRotate(node.isLeftChild() ? nodeGrandParent : nodeParent);
     }
@@ -130,41 +128,153 @@ public class RedBlackTree<T extends Comparable<T>> extends AbstractBinaryTree<T>
     }
 
     @Override
-    public void delete(T data) throws ElementDoesNotExistException {
-        RedBlackNode<T> toDelete = (RedBlackNode<T>) this.search(data);
-        if (toDelete == null)
-            throw new ElementDoesNotExistException();
-        this.root = this.deleteRecursive(this.root, data);
-        this.nodes--;
-        if (toDelete.getColorNumber() == RedBlackNode.RED)
-            return; //Deleting red nodes does not require any further change on the tree (recoloring or rotations).
-        this.recolorAndRotate(); //Otherwise, it will be necessary to check if the red-black tree rules still hold.
-    }
-
-    @Override
     protected AbstractNode<T> deleteRecursive(AbstractNode<T> node, T data) {
-        if (node == null)
-            return null;
-        if (node.getData().compareTo(data) > 0)
-            node.setLeftChild(this.deleteRecursive(node.getLeftChild(), data));
-        else if (node.getData().compareTo(data) < 0)
-            node.setRightChild(this.deleteRecursive(node.getRightChild(), data));
-        else {
-            if (!node.hasLeftChild())
-                return node.getRightChild();
-            if (!node.hasRightChild())
-                return node.getLeftChild();
-            node.setData(this.getMax(node.getLeftChild()));
-            node.setLeftChild(this.deleteRecursive(node.getLeftChild(), node.getData()));
-        }
+        this.deleteHelper((RedBlackNode<T>) this.search(data));
         return node;
     }
 
-    /**
-     * Downward from `this.root` towards leaves.
-     */
-    private void recolorAndRotate() {
+    private void deleteHelper(RedBlackNode<T> node) {
+        RedBlackNode<T> replacementNode = this.findReplacementOfNode(node);
+        boolean fullBlackCase = (replacementNode == null || replacementNode.isBlack()) && node.isBlack();
+        RedBlackNode<T> nodeParent = node.getParent();
+        if (replacementNode == null) { //Then node is leaf...
+            if (node == this.root)
+                this.root = null;
+            else {
+                if (fullBlackCase)
+                    this.fixDoubleBlack(node);
+                else if(node.getSibling() != null) //Either node or replacementNode is red.
+                    node.getSibling().redfy();
+                if (node.isLeftChild())
+                    node.getParent().setLeftChild(null);
+                else
+                    node.getParent().setRightChild(null);
+            }
+            return;
+        }
+        if (!node.hasLeftChild() || !node.hasRightChild()) { //If node has no children or has only one!
+            if (node == this.root) {
+                node.setData(replacementNode.getData());
+                node.setLeftChild(null);
+                node.setRightChild(null);
+            } else {
+                if (node.isLeftChild())
+                    nodeParent.setLeftChild(replacementNode);
+                else
+                    nodeParent.setRightChild(replacementNode);
+                replacementNode.setParent(nodeParent);
+                if (fullBlackCase)
+                    this.fixDoubleBlack(replacementNode);
+                else
+                    replacementNode.blackfy();
+            }
+            return;
+        }
+//      If we get here it means node has two children. Then we have to swap its value with its successor and call
+//      this method once again but now over the replacementNode.
+        node.swapData(replacementNode);
+        this.deleteHelper(replacementNode);
+    }
 
+    private RedBlackNode<T> findMin(RedBlackNode<T> sourceNode) {
+        if (sourceNode == null)
+            throw new IllegalArgumentException("you have passed me a null pointer");
+        if (sourceNode.getLeftChild() == null)
+            return sourceNode;
+        return this.findMin((RedBlackNode<T>) sourceNode.getLeftChild());
+    }
 
+    private RedBlackNode<T> findReplacementOfNode(RedBlackNode<T> node) {
+        if (node == null)
+            throw new IllegalArgumentException("you have given me a null pointer");
+        if (node.isChildless())
+            return null;
+        if (!node.hasLeftChild())
+            return (RedBlackNode<T>) node.getRightChild();
+        else if (!node.hasRightChild())
+            return (RedBlackNode<T>) node.getLeftChild();
+        else //node has two children then choose that one which is considered as its successor.
+            return this.findMin((RedBlackNode<T>) node.getRightChild());
+    }
+
+    private void fixRedRed(RedBlackNode<T> node) {
+        if (node == this.root) {
+            node.blackfy();
+            return;
+        }
+        RedBlackNode<T> parent = node.getParent(), grandpa = parent.getParent(), uncle = node.getUncle();
+        if (parent.isRed()) {
+            if (uncle != null && uncle.isRed()) {
+                parent.blackfy();
+                uncle.blackfy();
+                grandpa.redfy();
+                this.fixRedRed(grandpa);
+            } else {
+                if (parent.isLeftChild()) {
+                    if (node.isLeftChild())
+                        parent.swapColor(grandpa);
+                    else {
+                        this.leftRotation(parent);
+                        node.swapColor(grandpa);
+                    }
+                    this.rightRotation(grandpa);
+                } else {
+                    if (node.isLeftChild()) {
+                        this.rightRotation(parent);
+                        node.swapColor(grandpa);
+                    } else
+                        parent.swapColor(grandpa);
+                    this.leftRotation(grandpa);
+                }
+            }
+        }
+    }
+
+    private void fixDoubleBlack(RedBlackNode<T> node) {
+        if (node == this.root)
+            return;
+        RedBlackNode<T> nodeSibling = node.getSibling(), nodeParent = node.getParent();
+        if (nodeSibling == null)
+            this.fixDoubleBlack(nodeParent);
+        else if (nodeSibling.isRed()) {
+            nodeParent.redfy();
+            nodeSibling.blackfy();
+            if (nodeSibling.isLeftChild())
+                this.rightRotation(nodeParent);
+            else
+                this.leftRotation(nodeParent);
+            this.fixDoubleBlack(node);
+        } else {
+            if (nodeSibling.hasRedChild()) {
+                if (nodeSibling.getLeftChild() != null && ((RedBlackNode<T>) nodeSibling.getLeftChild()).isRed()) {
+                    if (nodeSibling.isLeftChild()) {
+                        ((RedBlackNode<T>) nodeSibling.getLeftChild()).setColorNumber(nodeSibling.getColorNumber());
+                        nodeSibling.setColorNumber(nodeParent.getColorNumber());
+                        this.rightRotation(nodeParent);
+                    } else {
+                        ((RedBlackNode<T>) nodeSibling.getLeftChild()).setColorNumber(nodeParent.getColorNumber());
+                        this.rightRotation(nodeSibling);
+                        this.leftRotation(nodeParent);
+                    }
+                } else {
+                    if (nodeSibling.isLeftChild()) {
+                        ((RedBlackNode<T>) nodeSibling.getRightChild()).setColorNumber(nodeParent.getColorNumber());
+                        this.leftRotation(nodeSibling);
+                        this.rightRotation(nodeParent);
+                    } else {
+                        ((RedBlackNode<T>) nodeSibling.getRightChild()).setColorNumber(nodeSibling.getColorNumber());
+                        nodeSibling.setColorNumber(nodeParent.getColorNumber());
+                        this.leftRotation(nodeParent);
+                    }
+                }
+                nodeParent.blackfy();
+            } else { //nodeSibling has two black children...
+                nodeSibling.redfy();
+                if (nodeParent.isBlack())
+                    this.fixDoubleBlack(nodeParent);
+                else
+                    nodeParent.blackfy();
+            }
+        }
     }
 }
